@@ -32,7 +32,7 @@ public class UserController {
 	
 	@PostConstruct
 	public void init() {
-		System.out.println("in init " + dao);
+		System.out.println("in init of UserController");
 	}
 	
 	@PostMapping("/validate")
@@ -42,6 +42,8 @@ public class UserController {
 		
 		if (validUser == null)
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	
+		System.out.println(validUser);
 		
 		return new ResponseEntity<User>(validUser, HttpStatus.OK);
 	}
