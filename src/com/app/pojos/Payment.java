@@ -1,0 +1,54 @@
+package com.app.pojos;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="payment")
+public class Payment {
+
+	private Integer payId;
+	private double amount;
+	private Appointment appointment;
+
+	public Payment() {
+	}
+
+	public Payment(double amount, Appointment appointment) {
+		this.amount = amount;
+		this.appointment = appointment;
+	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="pay_id")
+	public Integer getPayId() {
+		return payId;
+	}
+
+	public void setPayId(Integer payId) {
+		this.payId = payId;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "apmt_id")
+	public Appointment getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
+	}
+
+	@Override
+	public String toString() {
+		return "Payment [payId=" + payId + ", amount=" + amount + "]";
+	}
+
+}
