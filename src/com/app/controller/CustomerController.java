@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dao.ICustomerDao;
 import com.app.pojos.Customer;
+import com.app.pojos.CustomerAddress;
 
 @RestController
 @CrossOrigin
@@ -31,6 +32,12 @@ public class CustomerController {
 	ResponseEntity<?> addCustomer( @RequestBody Customer c)
 	{
 		return new ResponseEntity<Integer>(dao.addCustomer(c), HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/addcustomeraddress")
+	ResponseEntity<?> addCustomerAddress(@RequestBody CustomerAddress ca)
+	{
+		return null; //new ResponseEntity<Integer>(dao.addCustomerAddress(ca), HttpStatus.CREATED);
 	}
 
 }

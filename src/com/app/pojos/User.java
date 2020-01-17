@@ -61,7 +61,7 @@ public class User {
 		this.role = role;
 	}
 
-	@OneToOne
+	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
 	@JoinColumn(name = "cust_id")
 	public Customer getCustomer() {
 		return customer;
@@ -71,7 +71,7 @@ public class User {
 		this.customer = customer;
 	}
 	
-	@OneToOne
+	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
 	@JoinColumn(name = "owner_id")
 	public Owner getOwner() {
 		return owner;

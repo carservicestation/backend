@@ -1,9 +1,11 @@
 package com.app.pojos;
 import javax.persistence.*;
 
-@Embeddable
+@Entity
+@Table(name = "cust_address")
 public class CustomerAddress{
 	
+	private Integer addrId;
 	private String streetAddress;
 	private String landmark;
 	private String city;
@@ -22,6 +24,19 @@ public class CustomerAddress{
 		this.state = state;
 		this.country = country;
 	}
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "addr_id")
+	public Integer getAddrId() {
+		return addrId;
+	}
+
+	public void setAddrId(Integer addrId) {
+		this.addrId = addrId;
+	}
+
 	@Column(length=50, name = "street_address")
 	public String getStreetAddress() {
 		return streetAddress;

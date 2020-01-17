@@ -92,6 +92,17 @@ public class Owner {
 	public void setServiceCenters(List<ServiceCenter> serviceCenters) {
 		this.serviceCenters = serviceCenters;
 	}
+	
+	public void addServiceCenters(ServiceCenter sc)
+	{
+		this.serviceCenters.add(sc);
+	}
+	
+	public void removeServiceCenters(ServiceCenter sc)
+	{
+		this.serviceCenters.remove(sc);
+	}
+	
 
 	@Override
 	public String toString() {

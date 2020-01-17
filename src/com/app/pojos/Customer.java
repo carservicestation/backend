@@ -75,14 +75,23 @@ public class Customer {
 		this.password = password;
 	}
 
-	@ElementCollection
-	@CollectionTable(name = "cust_addr", joinColumns = @JoinColumn(name = "cust_id"))
+	@OneToMany
 	public List<CustomerAddress> getAddresses() {
 		return addresses;
 	}
 
 	public void setAddresses(List<CustomerAddress> addresses) {
 		this.addresses = addresses;
+	}
+	
+	public void addAddress(CustomerAddress ca)
+	{
+		this.addresses.add(ca);
+	}
+	
+	public void removeAddress(CustomerAddress ca)
+	{
+		this.addresses.remove(ca);
 	}
 
 	@Override
