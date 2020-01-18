@@ -10,15 +10,17 @@ import com.app.pojos.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/servicecenter")
-public class ServiceCenterController {
+@RequestMapping("/vehicle")
+public class VehicleController {
 	
 	@Autowired
-	private IServiceCenterDao scdao;
+	private IVehicleDao vdao;
 	
-	@GetMapping("/getcenters")
-	ResponseEntity<?> getAllCenters()
+	@GetMapping("/getvehicles")
+	ResponseEntity<?> getAllVehicles()
 	{
-		return new ResponseEntity<List<ServiceCenter>>(scdao.getServiceCenters(), HttpStatus.OK);
+		return new ResponseEntity<List<Vehicle>>(vdao.getVehicles(), HttpStatus.OK);
 	}
+	
+
 }

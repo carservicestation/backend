@@ -10,19 +10,15 @@ import com.app.pojos.User;
 @Repository
 @Transactional
 public class UserDao implements IUserDao {
-	
+
 	@Autowired
 	private SessionFactory sf;
 
 	@Override
 	public User validateUser(User u) {
-
 		String jpql = "select u from User u where u.email=:em and u.password=:pass";
-		
-		return sf.getCurrentSession().createQuery(jpql, User.class).setParameter("em", u.getEmail()).setParameter("pass", u.getPassword()).getSingleResult();
-	
+		return sf.getCurrentSession().createQuery(jpql, User.class).setParameter("em", u.getEmail())
+				.setParameter("pass", u.getPassword()).getSingleResult();
 	}
 	
-	
-
 }

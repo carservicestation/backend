@@ -26,38 +26,21 @@ import com.app.pojos.User;
 @CrossOrigin
 @RequestMapping("/user")
 public class UserController {
-	
+
 	@Autowired
 	private IUserDao dao;
-	
+
 	@PostConstruct
 	public void init() {
 		System.out.println("in init of UserController");
 	}
-	
 	@PostMapping("/validate")
-	public ResponseEntity<?> validateUser(@RequestBody User u)
-	{
+	public ResponseEntity<?> validateUser(@RequestBody User u) {
 		User validUser = dao.validateUser(u);
-		
 		if (validUser == null)
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-	
 		System.out.println(validUser);
-		
 		return new ResponseEntity<User>(validUser, HttpStatus.OK);
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-

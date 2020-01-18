@@ -5,18 +5,23 @@ import java.util.List;
 import com.app.pojos.*;
 
 public interface IOwnerDao {
-	
+
 	Integer addOwner(Owner o);
 
-	void addOwnerAddress(int oid, OwnerAddress oa);
+	Owner getOwnerById(int oid);
 
-	void removeOwnerAddress(int oid, int oaid);
+	void updateOwner(Owner o);
 
-	Owner getOwner(int oid);
+	void removeOwner(int oid);
 
 	List<Owner> getAllOwners();
-	
-	
-	
+
+	List<ServiceCenter> getServiceCentersByOwner(int oid);
+
+	void removeOwnerAddress(int oid);
+
+	OwnerAddress getOwnerAddress(int oid);
+
+	void addOrUpdateOwnerAddress(int oid, OwnerAddress oa);
 
 }

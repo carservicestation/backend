@@ -1,30 +1,19 @@
 package com.app.dao;
 
 import java.util.List;
-import java.util.Set;
 
-import com.app.pojos.Service;
 import com.app.pojos.ServiceCenter;
-import com.app.pojos.Vehicle;
 
 public interface IServiceCenterDao {
-	
-	Integer addService(Service s);
-
-	List<ServiceCenter> getServiceCenters();
-
-	Set<Service> getServicesByServiceCenter(int scid);
 
 	Integer addServiceCenter(ServiceCenter sc);
 
 	void removeServiceCenter(int scid);
 
-	void removeService(int sid);
+	ServiceCenter getServiceCenterById(int scid);
 
-	List<ServiceCenter> getServiceCentersByOwner(int oid);
+	void updateServiceCenter(ServiceCenter sc);
 
-	List<Service> getServices();
-
-	List<Vehicle> getVehicles();
+	List<ServiceCenter> getServiceCenters();
 
 }
