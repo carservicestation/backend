@@ -25,12 +25,26 @@ public class ServiceCenterDao implements IServiceCenterDao {
 
 	@Override
 	public List<ServiceCenter> getServiceCenters() {
+		/*service centers list for admin*/
 		String jpql = "select sc from ServiceCenter sc";
 		return (List<ServiceCenter>) sf.getCurrentSession().createQuery(jpql, ServiceCenter.class).getResultList();
+	}
+	@Override
+	public List<Service> getServices() {
+		/*services list for admin*/
+		String jpql = "select s from Service s";
+		return (List<Service>) sf.getCurrentSession().createQuery(jpql, Service.class).getResultList();
+	}
+	@Override
+	public List<Vehicle> getVehicles() {
+		/*Vehicle list for admin*/
+		String jpql = "select v from Vehicle v";
+		return (List<Vehicle>) sf.getCurrentSession().createQuery(jpql, Vehicle.class).getResultList();
 	}
 
 	@Override
 	public List<ServiceCenter> getServiceCentersByOwner(int oid) {
+		/*list of service centers owned by owner*/
 		Owner o = sf.getCurrentSession().get(Owner.class, oid);
 
 		o.getServiceCenters().size();

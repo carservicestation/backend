@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.app.pojos.Service;
 import com.app.pojos.ServiceCenter;
+import com.app.pojos.Vehicle;
 
 public interface IServiceCenterDao {
 	
@@ -21,5 +22,9 @@ public interface IServiceCenterDao {
 	void removeService(int sid);
 
 	List<ServiceCenter> getServiceCentersByOwner(int oid);
+
+	List<Service> getServices();
+
+	List<Vehicle> getVehicles();
 
 }

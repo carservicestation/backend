@@ -1,5 +1,7 @@
 package com.app.dao;
 
+import java.util.List;
+
 import com.app.pojos.*;
 
 public interface IOwnerDao {
@@ -11,6 +13,8 @@ public interface IOwnerDao {
 	void removeOwnerAddress(int oid, int oaid);
 
 	Owner getOwner(int oid);
+
+	List<Owner> getAllOwners();
 	
 	
 	

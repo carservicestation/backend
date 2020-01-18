@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "service")
 public class Service {
@@ -64,6 +66,7 @@ public class Service {
 	}
 	
 	@ManyToMany(mappedBy = "services")
+	@JsonIgnore
 	public Set<ServiceCenter> getCenters() {
 		return centers;
 	}
@@ -72,6 +75,7 @@ public class Service {
 		this.centers = centers;
 	}
 	@ManyToMany(mappedBy = "services")
+	@JsonIgnore
 	public Set<Appointment> getAppointments() {
 		return appointments;
 	}

@@ -1,6 +1,7 @@
 package com.app.pojos;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
@@ -63,6 +64,7 @@ public class User {
 
 	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
 	@JoinColumn(name = "cust_id")
+	@JsonIgnore
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -73,6 +75,7 @@ public class User {
 	
 	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
 	@JoinColumn(name = "owner_id")
+	@JsonIgnore
 	public Owner getOwner() {
 		return owner;
 	}

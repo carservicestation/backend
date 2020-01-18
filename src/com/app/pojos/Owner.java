@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "owner")
 public class Owner {
@@ -84,6 +86,7 @@ public class Owner {
 		this.address = address;
 	}
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="owner", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<ServiceCenter> getServiceCenters() {
 		return serviceCenters;

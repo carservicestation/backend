@@ -12,6 +12,7 @@ public class CustomerAddress{
 	private String pincode;
 	private String state;
 	private String country;
+	private Customer customer;
 	
 	public CustomerAddress() {
 	}
@@ -87,6 +88,14 @@ public class CustomerAddress{
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	@ManyToOne
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.util.HashSet;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "center")
 public class ServiceCenter {
@@ -75,6 +77,7 @@ public class ServiceCenter {
 		this.owner = owner;
 	}
 
+	@JsonIgnore
 	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinTable(name = "center_service",joinColumns = @JoinColumn(name="centre_id"),inverseJoinColumns = @JoinColumn(name="service_id"))
 	public Set<Service> getServices() {

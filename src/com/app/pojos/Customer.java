@@ -75,7 +75,7 @@ public class Customer {
 		this.password = password;
 	}
 
-	@OneToMany
+	@OneToMany(mappedBy="customer")
 	public List<CustomerAddress> getAddresses() {
 		return addresses;
 	}
@@ -87,11 +87,13 @@ public class Customer {
 	public void addAddress(CustomerAddress ca)
 	{
 		this.addresses.add(ca);
+		ca.setCustomer(this);
 	}
 	
 	public void removeAddress(CustomerAddress ca)
 	{
 		this.addresses.remove(ca);
+		ca.setCustomer(null);
 	}
 
 	@Override

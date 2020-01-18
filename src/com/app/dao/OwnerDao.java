@@ -1,5 +1,7 @@
 package com.app.dao;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,6 +39,14 @@ public class OwnerDao implements IOwnerDao {
 	public Owner getOwner(int oid)
 	{
 		return sf.getCurrentSession().get(Owner.class, oid);
+	}
+
+	@Override
+	public List<Owner> getAllOwners()
+	{
+		/*owners list for admin*/
+		String jpql = "select o from Owner o";
+		return (List<Owner>) sf.getCurrentSession().createQuery(jpql, Owner.class).getResultList();
 	}
 
 	@Override
