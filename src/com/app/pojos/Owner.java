@@ -17,7 +17,7 @@ public class Owner {
 	private String phone;
 	private String password;
 	private OwnerAddress address;
-	private List<ServiceCenter> serviceCenters = new ArrayList<>() ;
+	private List<ServiceCenter> serviceCenters = new ArrayList<>();
 	
 	public Owner() {
 	}
