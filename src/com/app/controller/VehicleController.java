@@ -12,12 +12,38 @@ import com.app.pojos.*;
 @CrossOrigin
 @RequestMapping("/vehicle")
 public class VehicleController {
-	
+
 	@Autowired
 	private IVehicleDao vdao;
 	
-	@GetMapping("/getvehicles")
-	ResponseEntity<?> getAllVehicles()
+	@PostMapping("/addVehicle")
+	ResponseEntity<?> addVehicle(@RequestBody Vehicle v)
+	{
+		return new ResponseEntity<Integer>(vdao.addVehicle(v), HttpStatus.OK);
+	}
+	
+	@GetMapping("/getVehicleById")
+	ResponseEntity<?> getVehicleById(@RequestParam int vid)
+	{
+		return new ResponseEntity<Vehicle>(vdao.getVehicleById(vid), HttpStatus.OK);
+	}
+	
+	@PostMapping("/updateVehicle")
+	ResponseEntity<?> updateVehicle(@RequestBody Vehicle v)
+	{
+		vdao.updateVehicle(v);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/removeVehicle")
+	ResponseEntity<?> removeVehicle(@RequestParam int vid)
+	{
+		vdao.removeVehicle(vid);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/getVehicles")
+	ResponseEntity<?> getVehicles()
 	{
 		return new ResponseEntity<List<Vehicle>>(vdao.getVehicles(), HttpStatus.OK);
 	}

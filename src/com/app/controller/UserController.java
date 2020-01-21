@@ -34,13 +34,25 @@ public class UserController {
 	public void init() {
 		System.out.println("in init of UserController");
 	}
+
 	@PostMapping("/validate")
 	public ResponseEntity<?> validateUser(@RequestBody User u) {
-		User validUser = dao.validateUser(u);
-		if (validUser == null)
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		System.out.println(validUser);
-		return new ResponseEntity<User>(validUser, HttpStatus.OK);
+
+		User validUser = null;
+		try 
+		{
+			validUser = dao.validateUser(u);
+			System.out.println(u);
+			return new ResponseEntity<User>(validUser, HttpStatus.OK);// return object
+		}
+		
+		catch (RuntimeException e) 
+		{
+			//e.printStackTrace();
+			return new ResponseEntity<User>(validUser, HttpStatus.NOT_FOUND);// return null
+		}
 	}
+	
+		
 
 }

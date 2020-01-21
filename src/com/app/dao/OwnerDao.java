@@ -61,7 +61,7 @@ public class OwnerDao implements IOwnerDao {
 	}
 
 	@Override
-	public OwnerAddress getOwnerAddress(int oid) {
+	public OwnerAddress getOwnerAddressByOwnerId(int oid) {
 		Owner o = sf.getCurrentSession().get(Owner.class, oid);
 		return o.getAddress();
 	}
@@ -80,5 +80,6 @@ public class OwnerDao implements IOwnerDao {
 		o.getServiceCenters().size();
 		return o.getServiceCenters();
 	}
+
 
 }

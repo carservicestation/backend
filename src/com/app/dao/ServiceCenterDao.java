@@ -43,4 +43,5 @@ public class ServiceCenterDao implements IServiceCenterDao {
 		String jpql = "select sc from ServiceCenter sc";
 		return (List<ServiceCenter>) sf.getCurrentSession().createQuery(jpql, ServiceCenter.class).getResultList();
 	}
+
 }

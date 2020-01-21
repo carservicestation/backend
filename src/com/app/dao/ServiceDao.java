@@ -15,6 +15,7 @@ import com.app.pojos.ServiceCenter;
 @Transactional
 public class ServiceDao implements IServiceDao {
 
+
 	@Autowired
 	private SessionFactory sf;
 

@@ -26,6 +26,7 @@ import com.app.pojos.OwnerAddress;
 @RequestMapping("/customer")
 public class CustomerController {
 	
+
 	@Autowired
 	private ICustomerDao cdao;
 	
@@ -34,7 +35,7 @@ public class CustomerController {
 		System.out.println("in init " + cdao);
 	}
 	
-	@PostMapping("/addcustomer")
+	@PostMapping("/addCustomer")
 	ResponseEntity<?> addCustomer( @RequestBody Customer c)
 	{
 		return new ResponseEntity<Integer>(cdao.addCustomer(c), HttpStatus.CREATED);

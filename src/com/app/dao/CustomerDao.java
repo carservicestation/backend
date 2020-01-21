@@ -12,7 +12,6 @@ import com.app.pojos.*;
 @Repository
 @Transactional
 public class CustomerDao implements ICustomerDao {
-
 	@Autowired
 	private SessionFactory sf;
 

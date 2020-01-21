@@ -44,5 +44,4 @@ public class VehicleDao implements IVehicleDao {
 		String jpql = "select v from Vehicle v";
 		return (List<Vehicle>) sf.getCurrentSession().createQuery(jpql, Vehicle.class).getResultList();
 	}
-
 }

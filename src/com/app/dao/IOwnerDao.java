@@ -20,8 +20,8 @@ public interface IOwnerDao {
 
 	void removeOwnerAddress(int oid);
 
-	OwnerAddress getOwnerAddress(int oid);
-
 	void addOrUpdateOwnerAddress(int oid, OwnerAddress oa);
+
+	OwnerAddress getOwnerAddressByOwnerId(int oid);
 
 }

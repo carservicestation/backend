@@ -25,51 +25,58 @@ public class OwnerController {
 		System.out.println("in init " + odao);
 	}
 
-	@PostMapping("/addowner")
+	@PostMapping("/addOwner")
 	ResponseEntity<?> addOwner(@RequestBody Owner o) {
 		return new ResponseEntity<Integer>(odao.addOwner(o), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getownerbyid")
-	ResponseEntity<?> getOwner(@RequestParam int oid) {
+	@GetMapping("/getOwnerById")
+	ResponseEntity<?> getOwnerById(@RequestParam int oid) {
 		return new ResponseEntity<Owner>(odao.getOwnerById(oid), HttpStatus.OK);
 	}
 
-	@PostMapping("/updateowner")
+	@PostMapping("/updateOwner")
 	ResponseEntity<?> updateOwner(@RequestBody Owner o) {
 		odao.updateOwner(o);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@GetMapping("/removeowner")
+	@GetMapping("/removeOwner")
 	ResponseEntity<?> removeOwner(@RequestParam int oid) {
 		odao.removeOwner(oid);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@PostMapping("/addorupdateowneraddress")
+	@GetMapping("/getAllOwners")/*C*/
+	ResponseEntity<?> getAllOwners() {
+		return new ResponseEntity<List<Owner>>(odao.getAllOwners(), HttpStatus.OK);
+	}
+	
+	@PostMapping("/addOrUpdateOwnerAddress")
 	ResponseEntity<?> addOrUpdateOwnerAddress(@RequestParam int oid, @RequestBody OwnerAddress oa)
 	{
 		odao.addOrUpdateOwnerAddress(oid,oa);
 		return new ResponseEntity<>( HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/getowneraddressbyoid")
-	ResponseEntity<?> getOwnerAddress( @RequestParam int oid)
+	@GetMapping("/getOwnerAddressById")
+	ResponseEntity<?> getOwnerAddressById( @RequestParam int oid)
 	{
-		return new ResponseEntity<OwnerAddress>(odao.getOwnerAddress(oid), HttpStatus.OK);
+		return new ResponseEntity<OwnerAddress>(odao.getOwnerAddressByOwnerId(oid), HttpStatus.OK);
 	}
 	
-	@PostMapping("/removeowneraddress")
+	@PostMapping("/removeOwnerAddress")
 	ResponseEntity<?> removeOwnerAddress( @RequestParam int oid)
 	{
 		odao.removeOwnerAddress(oid);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
-	@GetMapping("/getowners")
-	ResponseEntity<?> getAllOwners() {
-		return new ResponseEntity<List<Owner>>(odao.getAllOwners(), HttpStatus.OK);
+	
+	@PostMapping("/getServiceCentersByOwner")
+	ResponseEntity<?> getServiceCentersByOwner( @RequestParam int oid)
+	{
+		return new ResponseEntity<List<ServiceCenter>>(odao.getServiceCentersByOwner(oid),HttpStatus.OK);
 	}
+	
 
 }
