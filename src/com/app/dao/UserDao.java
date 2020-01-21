@@ -17,8 +17,11 @@ public class UserDao implements IUserDao {
 	@Override
 	public User validateUser(User u) {
 		String jpql = "select u from User u where u.email=:em and u.password=:pass";
-		return sf.getCurrentSession().createQuery(jpql, User.class).setParameter("em", u.getEmail())
+		User dbu= sf.getCurrentSession().createQuery(jpql, User.class).setParameter("em", u.getEmail())
 				.setParameter("pass", u.getPassword()).getSingleResult();
+		 
+		System.out.println(dbu);
+		 return dbu;
 	}
 	
 }
