@@ -1,9 +1,12 @@
 package com.app.pojos;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cust_address")
-public class CustomerAddress{
+@Table(name = "address")
+public class Address{
 	
 	private Integer addrId;
 	private String streetAddress;
@@ -12,12 +15,19 @@ public class CustomerAddress{
 	private String pincode;
 	private String state;
 	private String country;
+	
 	private Customer customer;
 	
-	public CustomerAddress() {
+	private ServiceCenter serviceCenter;
+	
+	private Owner owner;
+	
+	private List<Appointment> appointments = new ArrayList<>();
+	
+	public Address() {
 	}
 	
-	public CustomerAddress(String streetAddress, String landmark, String city, String pincode, String state, String country) {
+	public Address(String streetAddress, String landmark, String city, String pincode, String state, String country) {
 		this.streetAddress = streetAddress;
 		this.landmark = landmark;
 		this.city = city;
@@ -89,7 +99,9 @@ public class CustomerAddress{
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
 	@ManyToOne
+	@JoinColumn(name="cust_id")
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -98,9 +110,50 @@ public class CustomerAddress{
 		this.customer = customer;
 	}
 
+	@OneToOne
+	@JoinColumn(name="center_id")
+	public ServiceCenter getServiceCenter() {
+		return serviceCenter;
+	}
+
+	public void setServiceCenter(ServiceCenter serviceCenter) {
+		this.serviceCenter = serviceCenter;
+	}
+	
+	@OneToOne
+	@JoinColumn(name="owner_id")
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
+
+	@OneToMany(mappedBy = "pickupAddress", cascade = CascadeType.PERSIST)
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public void addAppointment(Appointment ap)
+	{
+		this.appointments.add(ap);
+		ap.setPickupAddress(this);
+	}
+
+	public void removeAppointment(Appointment ap)
+	{
+		this.appointments.remove(ap);
+		ap.setPickupAddress(null);
+	}	
+	
 	@Override
 	public String toString() {
-		return "CustomerAddress [streetAddress=" + streetAddress + ", landmark=" + landmark + ", city=" + city
+		return "Address [streetAddress=" + streetAddress + ", landmark=" + landmark + ", city=" + city
 				+ ", pincode=" + pincode + ", state=" + state + ", country=" + country + "]";
 	}	
 

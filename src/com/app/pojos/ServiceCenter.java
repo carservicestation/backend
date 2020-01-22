@@ -1,7 +1,9 @@
 package com.app.pojos;
 
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -16,14 +18,16 @@ public class ServiceCenter {
 	private String email;
 	private String phone;
 	private Owner owner;
+	private Address address;
+
 	private Set<Service> services = new HashSet<>();
-	private CenterAddress address;
 	
+	private List<Appointment> appointments = new ArrayList<>();
+
 	public ServiceCenter() {
 	}
 
 	public ServiceCenter(String name, String email, String phone) {
-
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
@@ -31,7 +35,7 @@ public class ServiceCenter {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="center_id")
+	@Column(name = "center_id")
 	public Integer getCenterId() {
 		return centerId;
 	}
@@ -67,8 +71,17 @@ public class ServiceCenter {
 		this.phone = phone;
 	}
 
+	@OneToOne(mappedBy = "serviceCenter", cascade = CascadeType.ALL, orphanRemoval = true)
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	@ManyToOne
-	@JoinColumn(name="owner_id")
+	@JoinColumn(name = "owner_id")
 	public Owner getOwner() {
 		return owner;
 	}
@@ -78,8 +91,8 @@ public class ServiceCenter {
 	}
 
 	@JsonIgnore
-	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-	@JoinTable(name = "center_service",joinColumns = @JoinColumn(name="centre_id"),inverseJoinColumns = @JoinColumn(name="service_id"))
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "center_service", joinColumns = @JoinColumn(name = "centre_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
 	public Set<Service> getServices() {
 		return services;
 	}
@@ -88,19 +101,57 @@ public class ServiceCenter {
 		this.services = services;
 	}
 	
-	@Embedded
-	public CenterAddress getAddress() {
-		return address;
+	@OneToMany(mappedBy = "serviceCenter", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Appointment> getAppointments() {
+		return appointments;
 	}
 
-	public void setAddress(CenterAddress address) {
-		this.address = address;
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public void addService(Service s)
+	{
+		this.services.add(s);
+		s.getServiceCenters().add(this);
+	}
+	
+	public void removeService(Service s)
+	{
+		this.services.remove(s);
+		s.getServiceCenters().remove(this);
+	}
+	
+	@Override
+	public String toString() {
+		return "ServiceCenter [centerId=" + centerId + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
 	}
 
 	@Override
-	public String toString() {
-		return "ServiceCenter [centerId=" + centerId + ", name=" + name + ", email=" + email + ", phone=" + phone
-				+ "]";
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((centerId == null) ? 0 : centerId.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ServiceCenter other = (ServiceCenter) obj;
+		if (centerId == null) {
+			if (other.centerId != null)
+				return false;
+		} else if (!centerId.equals(other.centerId))
+			return false;
+		return true;
+	}
+	
+	
 
 }

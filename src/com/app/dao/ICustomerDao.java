@@ -1,13 +1,12 @@
 package com.app.dao;
 
-import com.app.pojos.Customer;
-import com.app.pojos.CustomerAddress;
+import com.app.pojos.*;
 
 public interface ICustomerDao {
 	
 	Integer addCustomer(Customer c);
 
-	void addCustomerAddress(int cid, CustomerAddress ca);
+	void addCustomerAddress(int cid, Address ca);
 
 	void removeCustomerAddress(int cid, int caid);
 

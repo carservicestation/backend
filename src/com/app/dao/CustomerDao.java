@@ -1,7 +1,5 @@
 package com.app.dao;
 
-import java.util.List;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,7 +41,7 @@ public class CustomerDao implements ICustomerDao {
 	}
 
 	@Override
-	public void addCustomerAddress(int cid, CustomerAddress ca) {
+	public void addCustomerAddress(int cid, Address ca) {
 
 		Customer c = sf.getCurrentSession().get(Customer.class, cid);
 
@@ -59,7 +57,7 @@ public class CustomerDao implements ICustomerDao {
 
 		Customer c = sf.getCurrentSession().get(Customer.class, cid);
 
-		CustomerAddress ca = sf.getCurrentSession().get(CustomerAddress.class, caid);
+		Address ca = sf.getCurrentSession().get(Address.class, caid);
 		
 		c.removeAddress(ca);
 

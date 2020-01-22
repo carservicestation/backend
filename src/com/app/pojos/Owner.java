@@ -16,7 +16,7 @@ public class Owner {
 	private String email;
 	private String phone;
 	private String password;
-	private OwnerAddress address;
+	private Address address;
 	private List<ServiceCenter> serviceCenters = new ArrayList<>();
 	
 	public Owner() {
@@ -77,15 +77,15 @@ public class Owner {
 		this.password = password;
 	}
 	
-	@Embedded
-	public OwnerAddress getAddress() {
+	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(OwnerAddress address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy="owner", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<ServiceCenter> getServiceCenters() {
@@ -96,17 +96,18 @@ public class Owner {
 		this.serviceCenters = serviceCenters;
 	}
 	
-	public void addServiceCenters(ServiceCenter sc)
+	public void addServiceCenter(ServiceCenter sc)
 	{
 		this.serviceCenters.add(sc);
+		sc.setOwner(this);	
 	}
 	
-	public void removeServiceCenters(ServiceCenter sc)
+	public void removeServiceCenter(ServiceCenter sc)
 	{
 		this.serviceCenters.remove(sc);
+		sc.setOwner(null);
 	}
 	
-
 	@Override
 	public String toString() {
 		return "Owner [ownerId=" + ownerId + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password="

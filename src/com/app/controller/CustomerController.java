@@ -1,25 +1,18 @@
 package com.app.controller;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dao.ICustomerDao;
-import com.app.pojos.Customer;
-import com.app.pojos.CustomerAddress;
-import com.app.pojos.Owner;
-import com.app.pojos.OwnerAddress;
+import com.app.dao.*;
+import com.app.pojos.*;
 
 @RestController
 @CrossOrigin
@@ -42,7 +35,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/addcustomeraddress")
-	ResponseEntity<?> addCustomerAddress(@RequestBody CustomerAddress ca)
+	ResponseEntity<?> addCustomerAddress(@RequestBody Address ca)
 	{
 		return null; //new ResponseEntity<Integer>(dao.addCustomerAddress(ca), HttpStatus.CREATED);
 	}

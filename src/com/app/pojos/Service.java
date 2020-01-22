@@ -16,7 +16,7 @@ public class Service {
 	private String name;
 	private String desc;
 	private double price;
-	private Set<ServiceCenter> centers = new HashSet<>();
+	private Set<ServiceCenter> serviceCenters = new HashSet<>();
 	private Set<Appointment> appointments = new HashSet<>();
 	
 	public Service() {
@@ -67,13 +67,14 @@ public class Service {
 	
 	@ManyToMany(mappedBy = "services")
 	@JsonIgnore
-	public Set<ServiceCenter> getCenters() {
-		return centers;
+	public Set<ServiceCenter> getServiceCenters() {
+		return serviceCenters;
 	}
 
-	public void setCenters(Set<ServiceCenter> centers) {
-		this.centers = centers;
+	public void setServiceCenters(Set<ServiceCenter> serviceCenters) {
+		this.serviceCenters = serviceCenters;
 	}
+	
 	@ManyToMany(mappedBy = "services")
 	@JsonIgnore
 	public Set<Appointment> getAppointments() {

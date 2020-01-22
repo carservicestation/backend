@@ -14,7 +14,7 @@ public class Customer {
 	private String email;
 	private String phone;
 	private String password;
-	private List<CustomerAddress> addresses = new ArrayList<>();
+	private List<Address> addresses = new ArrayList<>();
 
 	public Customer() {
 
@@ -75,22 +75,22 @@ public class Customer {
 		this.password = password;
 	}
 
-	@OneToMany(mappedBy="customer")
-	public List<CustomerAddress> getAddresses() {
+	@OneToMany(mappedBy="customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Address> getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(List<CustomerAddress> addresses) {
+	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
 	
-	public void addAddress(CustomerAddress ca)
+	public void addAddress(Address ca)
 	{
 		this.addresses.add(ca);
 		ca.setCustomer(this);
 	}
 	
-	public void removeAddress(CustomerAddress ca)
+	public void removeAddress(Address ca)
 	{
 		this.addresses.remove(ca);
 		ca.setCustomer(null);

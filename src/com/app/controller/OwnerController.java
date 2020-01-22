@@ -53,7 +53,7 @@ public class OwnerController {
 	}
 	
 	@PostMapping("/addOrUpdateOwnerAddress")
-	ResponseEntity<?> addOrUpdateOwnerAddress(@RequestParam int oid, @RequestBody OwnerAddress oa)
+	ResponseEntity<?> addOrUpdateOwnerAddress(@RequestParam int oid, @RequestBody Address oa)
 	{
 		odao.addOrUpdateOwnerAddress(oid,oa);
 		return new ResponseEntity<>( HttpStatus.CREATED);
@@ -62,7 +62,7 @@ public class OwnerController {
 	@GetMapping("/getOwnerAddressById")
 	ResponseEntity<?> getOwnerAddressById( @RequestParam int oid)
 	{
-		return new ResponseEntity<OwnerAddress>(odao.getOwnerAddressByOwnerId(oid), HttpStatus.OK);
+		return new ResponseEntity<Address>(odao.getOwnerAddressByOwnerId(oid), HttpStatus.OK);
 	}
 	
 	@PostMapping("/removeOwnerAddress")

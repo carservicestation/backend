@@ -19,14 +19,14 @@ public class OwnerDao implements IOwnerDao {
 	@Override
 	public Integer addOwner(Owner o) {
 		Integer goid = (Integer) sf.getCurrentSession().save(o);
-		// System.out.println("cid" + goid);
+		System.out.println("cid" + goid);
 		User u = new User();
 		u.setEmail(o.getEmail());
 		u.setPassword(o.getPassword());
 		u.setRole(Role.CUSTOMER);
 		u.setOwner(o);
 		Integer guid = (Integer) sf.getCurrentSession().save(u);
-		// System.out.println("guid" + guid);
+		System.out.println("guid" + guid);
 		return goid;
 	}
 
@@ -54,14 +54,14 @@ public class OwnerDao implements IOwnerDao {
 	}
 
 	@Override
-	public void addOrUpdateOwnerAddress(int oid, OwnerAddress oa) {
+	public void addOrUpdateOwnerAddress(int oid, Address oa) {
 		Owner o = sf.getCurrentSession().get(Owner.class, oid);
 		o.setAddress(oa);
 		sf.getCurrentSession().update(o);
 	}
 
 	@Override
-	public OwnerAddress getOwnerAddressByOwnerId(int oid) {
+	public Address getOwnerAddressByOwnerId(int oid) {
 		Owner o = sf.getCurrentSession().get(Owner.class, oid);
 		return o.getAddress();
 	}
