@@ -18,54 +18,41 @@ public class ServiceController {
 
 	@Autowired
 	private IServiceDao sdao;
-	
+
 	@PostMapping("/addService")
-	ResponseEntity<?> addService( @RequestBody Service s)
-	{
+	ResponseEntity<?> addService(@RequestBody Service s) {
 		return new ResponseEntity<Integer>(sdao.addService(s), HttpStatus.CREATED);
 	}
-	
-	@GetMapping("/getServiceById")
-	ResponseEntity<?> getServiceById( @RequestParam int sid)
-	{
-		return new ResponseEntity<Service>(sdao.getServiceById(sid), HttpStatus.CREATED);
+
+	@GetMapping("/getServiceById/{sid}")
+	ResponseEntity<?> getServiceById(@PathVariable(name = "sid") String sid) {
+		int i = Integer.parseInt(sid);
+		System.out.println("sid :" + sid);
+		return new ResponseEntity<Service>(sdao.getServiceById(i), HttpStatus.CREATED);
 	}
-	
+
 	@PostMapping("/updateService")
-	ResponseEntity<?> updateService( @RequestBody Service s)
-	{
+	ResponseEntity<?> updateService(@RequestBody Service s) {
 		sdao.updateService(s);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
-	@PostMapping("/removeService")
-	ResponseEntity<?> removeService( @RequestParam int sid)
-	{
-		sdao.removeService(sid);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+
+	@GetMapping("/removeService/{sid}")
+	ResponseEntity<?> removeService(@PathVariable(name = "sid") String sid) {
+		System.out.println("sid :" + sid);
+		int i = Integer.parseInt(sid);
+		sdao.removeService(i);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/getServices")
-	ResponseEntity<?> getServices()
-	{
+	ResponseEntity<?> getServices() {
 		return new ResponseEntity<List<Service>>(sdao.getServices(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/getServicesByServiceCenter")
-	ResponseEntity<?> getServicesByServiceCenter(@RequestParam int scid)
-	{
+	ResponseEntity<?> getServicesByServiceCenter(@RequestParam int scid) {
 		return new ResponseEntity<Set<Service>>(sdao.getServicesByServiceCenter(scid), HttpStatus.OK);
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
