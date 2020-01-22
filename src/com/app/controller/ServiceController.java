@@ -52,7 +52,7 @@ public class ServiceController {
 
 	@GetMapping("/getServicesByServiceCenter")
 	ResponseEntity<?> getServicesByServiceCenter(@RequestParam int scid) {
-		return new ResponseEntity<Set<Service>>(sdao.getServicesByServiceCenter(scid), HttpStatus.OK);
+		return new ResponseEntity<Set<Service>>(sdao.getServicesByServiceCenterId(scid), HttpStatus.OK);
 	}
 
 }

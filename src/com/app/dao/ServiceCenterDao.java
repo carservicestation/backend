@@ -37,6 +37,15 @@ public class ServiceCenterDao implements IServiceCenterDao {
 		sf.getCurrentSession().remove(sc);
 	}
 
+
+	@Override
+	public List<ServiceCenter> getServiceCentersByOwnerId(int oid) {
+		
+		Owner o = sf.getCurrentSession().get(Owner.class, oid);
+		o.getServiceCenters().size();
+		return o.getServiceCenters();
+	}
+	
 	@Override
 	public List<ServiceCenter> getServiceCenters() {
 		/* service centers list for admin */

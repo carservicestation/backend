@@ -16,4 +16,6 @@ public interface IServiceCenterDao {
 
 	List<ServiceCenter> getServiceCenters();
 
+	List<ServiceCenter> getServiceCentersByOwnerId(int oid);
+
 }

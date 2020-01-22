@@ -53,25 +53,7 @@ public class OwnerDao implements IOwnerDao {
 		return (List<Owner>) sf.getCurrentSession().createQuery(jpql, Owner.class).getResultList();
 	}
 
-	@Override
-	public void addOrUpdateOwnerAddress(int oid, Address oa) {
-		Owner o = sf.getCurrentSession().get(Owner.class, oid);
-		o.setAddress(oa);
-		sf.getCurrentSession().update(o);
-	}
-
-	@Override
-	public Address getOwnerAddressByOwnerId(int oid) {
-		Owner o = sf.getCurrentSession().get(Owner.class, oid);
-		return o.getAddress();
-	}
 	
-	@Override
-	public void removeOwnerAddress(int oid) {
-		Owner o = sf.getCurrentSession().get(Owner.class, oid);
-		o.setAddress(null);
-		sf.getCurrentSession().update(o);
-	}
 		
 	@Override
 	public List<ServiceCenter> getServiceCentersByOwner(int oid) {

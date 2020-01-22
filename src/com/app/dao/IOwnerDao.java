@@ -17,11 +17,5 @@ public interface IOwnerDao {
 	List<Owner> getAllOwners();
 
 	List<ServiceCenter> getServiceCentersByOwner(int oid);
-
-	void removeOwnerAddress(int oid);
-
-	void addOrUpdateOwnerAddress(int oid, Address oa);
-
-	Address getOwnerAddressByOwnerId(int oid);
-
+	
 }

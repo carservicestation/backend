@@ -13,10 +13,12 @@ public interface IServiceDao {
 	
 	Integer addService(Service s);
 
-	Set<Service> getServicesByServiceCenter(int scid);
-
 	void removeService(int sid);
 
 	List<Service> getServices();
+
+	Set<Service> getServicesByServiceCenterId(int scid);
+
+	Set<Service> getServicesByAppointmentId(int apid);
 	
 }

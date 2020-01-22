@@ -122,6 +122,18 @@ public class ServiceCenter {
 		s.getServiceCenters().remove(this);
 	}
 	
+	public void addAddress(Address a)
+	{
+		this.setAddress(a);
+		a.setServiceCenter(this);
+	}
+	
+	public void removeAddress()
+	{
+		this.setAddress(null);
+		this.address.setServiceCenter(null);
+	}
+	
 	@Override
 	public String toString() {
 		return "ServiceCenter [centerId=" + centerId + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";

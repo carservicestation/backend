@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "address")
 public class Address{
@@ -100,6 +102,7 @@ public class Address{
 		this.country = country;
 	}
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cust_id")
 	public Customer getCustomer() {
@@ -129,7 +132,8 @@ public class Address{
 	public void setOwner(Owner owner) {
 		this.owner = owner;
 	}
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "pickupAddress", cascade = CascadeType.PERSIST)
 	public List<Appointment> getAppointments() {
 		return appointments;

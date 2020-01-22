@@ -108,6 +108,18 @@ public class Owner {
 		sc.setOwner(null);
 	}
 	
+	public void addAddress(Address a)
+	{
+		this.setAddress(a);
+		a.setOwner(this);
+	}
+	
+	public void removeAddress()
+	{
+		this.setAddress(null);
+		this.address.setOwner(null);
+	}
+	
 	@Override
 	public String toString() {
 		return "Owner [ownerId=" + ownerId + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password="
