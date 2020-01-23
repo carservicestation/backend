@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "customer")
 public class Customer {
@@ -14,6 +16,9 @@ public class Customer {
 	private String email;
 	private String phone;
 	private String password;
+
+	private User user;
+
 	private List<Address> addresses = new ArrayList<>();
 
 	public Customer() {
@@ -21,16 +26,16 @@ public class Customer {
 	}
 
 	public Customer(String name, String email, String phone, String password) {
-	
+
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="cust_id")
+	@Column(name = "cust_id")
 	public Integer getCustId() {
 		return custId;
 	}
@@ -38,7 +43,7 @@ public class Customer {
 	public void setCustId(Integer custId) {
 		this.custId = custId;
 	}
-	
+
 	@Column(length = 30)
 	public String getName() {
 		return name;
@@ -75,7 +80,18 @@ public class Customer {
 		this.password = password;
 	}
 
-	@OneToMany(mappedBy="customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	@JsonIgnore
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Address> getAddresses() {
 		return addresses;
 	}
@@ -83,15 +99,13 @@ public class Customer {
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
-	
-	public void addAddress(Address ca)
-	{
+
+	public void addAddress(Address ca) {
 		this.addresses.add(ca);
 		ca.setCustomer(this);
 	}
-	
-	public void removeAddress(Address ca)
-	{
+
+	public void removeAddress(Address ca) {
 		this.addresses.remove(ca);
 		ca.setCustomer(null);
 	}
@@ -103,16 +117,12 @@ public class Customer {
 	}
 }
 
-
-
 /*
- * Online Car Service Station
- * Car Service Station is an online application through which you can search
- * nearby Service Centers according to your convenience.Through this application
- * you can reserve a time slot for servicing and repairing of your car as per
- * availability. You can select a service center, services provided by specific
- * service center, vehicle pickup options, timing, service charges, contacts.
- * User will have to create an account on application to use it. 
+ * Online Car Service Station Car Service Station is an online application
+ * through which you can search nearby Service Centers according to your
+ * convenience.Through this application you can reserve a time slot for
+ * servicing and repairing of your car as per availability. You can select a
+ * service center, services provided by specific service center, vehicle pickup
+ * options, timing, service charges, contacts. User will have to create an
+ * account on application to use it.
  */
-
-

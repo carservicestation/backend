@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.pojos.User;
 
 @Repository
-@Transactional
 public class UserDao implements IUserDao {
 
 	@Autowired
@@ -19,9 +18,12 @@ public class UserDao implements IUserDao {
 		String jpql = "select u from User u where u.email=:em and u.password=:pass";
 		User dbu= sf.getCurrentSession().createQuery(jpql, User.class).setParameter("em", u.getEmail())
 				.setParameter("pass", u.getPassword()).getSingleResult();
-		 
-		System.out.println(dbu);
-		 return dbu;
+		return dbu;
 	}
-	
+
+	@Override
+	public User addUser(User u) {
+		sf.getCurrentSession().save(u);
+		return u;
+	}
 }

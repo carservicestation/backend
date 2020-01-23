@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.app.dao.*;
 
 import com.app.pojos.*;
+import com.app.service.IOwnerService;
 
 @RestController
 @CrossOrigin
@@ -18,47 +19,38 @@ import com.app.pojos.*;
 public class OwnerController {
 
 	@Autowired
-	private IOwnerDao odao;
-
-	@PostConstruct
-	public void init() {
-		System.out.println("in init " + odao);
-	}
+	private IOwnerService os;
 
 	@PostMapping("/addOwner")
 	ResponseEntity<?> addOwner(@RequestBody Owner o) {
-		return new ResponseEntity<Integer>(odao.addOwner(o), HttpStatus.CREATED);
+		return new ResponseEntity<Owner>(os.addOwner(o), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/getOwnerById")
 	ResponseEntity<?> getOwnerById(@RequestParam int oid) {
-		return new ResponseEntity<Owner>(odao.getOwnerById(oid), HttpStatus.OK);
+		return new ResponseEntity<Owner>(os.getOwnerById(oid), HttpStatus.OK);
 	}
 
 	@PostMapping("/updateOwner")
 	ResponseEntity<?> updateOwner(@RequestBody Owner o) {
-		odao.updateOwner(o);
+		os.updateOwner(o);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@GetMapping("/removeOwner")
 	ResponseEntity<?> removeOwner(@RequestParam int oid) {
-		odao.removeOwner(oid);
+		os.removeOwner(oid);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@GetMapping("/getAllOwners")/*C*/
 	ResponseEntity<?> getAllOwners() {
-		return new ResponseEntity<List<Owner>>(odao.getAllOwners(), HttpStatus.OK);
+		return new ResponseEntity<List<Owner>>(os.getAllOwners(), HttpStatus.OK);
 	}
-	
-	
 	
 	@PostMapping("/getServiceCentersByOwner")
 	ResponseEntity<?> getServiceCentersByOwner( @RequestParam int oid)
 	{
-		return new ResponseEntity<List<ServiceCenter>>(odao.getServiceCentersByOwner(oid),HttpStatus.OK);
+		return new ResponseEntity<List<ServiceCenter>>(os.getServiceCentersByOwner(oid),HttpStatus.OK);
 	}
-	
-
 }

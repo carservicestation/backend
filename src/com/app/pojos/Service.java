@@ -16,6 +16,7 @@ public class Service {
 	private String name;
 	private String desc;
 	private double price;
+	private byte[] image;
 	private Set<ServiceCenter> serviceCenters = new HashSet<>();
 	private Set<Appointment> appointments = new HashSet<>();
 	
@@ -65,6 +66,15 @@ public class Service {
 		this.price = price;
 	}
 	
+	@Lob
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	@ManyToMany(mappedBy = "services")
 	@JsonIgnore
 	public Set<ServiceCenter> getServiceCenters() {

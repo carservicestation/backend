@@ -16,7 +16,10 @@ public class Owner {
 	private String email;
 	private String phone;
 	private String password;
+	
 	private Address address;
+	private User user;
+	
 	private List<ServiceCenter> serviceCenters = new ArrayList<>();
 	
 	public Owner() {
@@ -84,6 +87,17 @@ public class Owner {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	
+	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	@JsonIgnore
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@JsonIgnore

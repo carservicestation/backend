@@ -4,7 +4,7 @@ import com.app.pojos.*;
 
 public interface ICustomerDao {
 	
-	Integer addCustomer(Customer c);
+	Customer addCustomer(Customer c);
 	void removeCustomer(int cid);
 	
 }

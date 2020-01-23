@@ -11,9 +11,7 @@ public class User {
 	private String email;
 	private String password;
 	private Role role;
-	private Customer customer;
-	private Owner owner;
-
+	
 	public User() {
 	}
 
@@ -61,28 +59,7 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
-	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
-	@JoinColumn(name = "cust_id")
-	@JsonIgnore
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 	
-	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
-	@JoinColumn(name = "owner_id")
-	@JsonIgnore
-	public Owner getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Owner owner) {
-		this.owner = owner;
-	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", role=" + role + "]";

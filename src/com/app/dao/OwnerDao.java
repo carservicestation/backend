@@ -17,17 +17,9 @@ public class OwnerDao implements IOwnerDao {
 	private SessionFactory sf;
 
 	@Override
-	public Integer addOwner(Owner o) {
-		Integer goid = (Integer) sf.getCurrentSession().save(o);
-		System.out.println("cid" + goid);
-		User u = new User();
-		u.setEmail(o.getEmail());
-		u.setPassword(o.getPassword());
-		u.setRole(Role.CUSTOMER);
-		u.setOwner(o);
-		Integer guid = (Integer) sf.getCurrentSession().save(u);
-		System.out.println("guid" + guid);
-		return goid;
+	public Owner addOwner(Owner o) {
+		sf.getCurrentSession().save(o);
+		return o;
 	}
 
 	@Override

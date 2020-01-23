@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.app.dao.IUserDao;
 import com.app.pojos.User;
+import com.app.service.IUserService;
 
 @RestController
 @CrossOrigin
@@ -18,20 +19,15 @@ import com.app.pojos.User;
 public class UserController {
 
 	@Autowired
-	private IUserDao dao;
-
-	@PostConstruct
-	public void init() {
-		System.out.println("in init of UserController");
-	}
-
+	private IUserService us;
+	
 	@PostMapping("/validate")
 	public ResponseEntity<?> validateUser(@RequestBody User u) {
 
 		User validUser = null;
-		try 
+		try
 		{
-			validUser = dao.validateUser(u);
+			validUser = us.validateUser(u);
 			System.out.println(u);
 			return new ResponseEntity<User>(validUser, HttpStatus.OK);// return object
 		}

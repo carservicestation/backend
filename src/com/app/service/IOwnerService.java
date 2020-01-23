@@ -1,10 +1,13 @@
-package com.app.dao;
+package com.app.service;
 
 import java.util.List;
 
-import com.app.pojos.*;
+import com.app.pojos.Customer;
+import com.app.pojos.Owner;
+import com.app.pojos.ServiceCenter;
 
-public interface IOwnerDao {
+public interface IOwnerService {
+
 
 	Owner addOwner(Owner o);
 
@@ -17,5 +20,5 @@ public interface IOwnerDao {
 	List<Owner> getAllOwners();
 
 	List<ServiceCenter> getServiceCentersByOwner(int oid);
-	
+
 }
