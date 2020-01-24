@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "user")
 public class User {
 
-	private Integer userId;
+	private Integer id;
 	private String email;
 	private String password;
 	private Role role;
@@ -24,12 +24,12 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	public Integer getUserId() {
-		return userId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(length = 30, unique = true, nullable = false)
@@ -59,10 +59,10 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", role=" + role + "]";
+		return "User [userId=" + id + ", email=" + email + ", password=" + password + ", role=" + role + "]";
 	}
 
 

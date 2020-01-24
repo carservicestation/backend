@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "address")
 public class Address{
 	
-	private Integer addrId;
+	private Integer id;
 	private String streetAddress;
 	private String landmark;
 	private String city;
@@ -38,16 +38,15 @@ public class Address{
 		this.country = country;
 	}
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "addr_id")
-	public Integer getAddrId() {
-		return addrId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setAddrId(Integer addrId) {
-		this.addrId = addrId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(length=50, name = "street_address")

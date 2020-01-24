@@ -15,7 +15,7 @@ public class UserService implements IUserService {
 	private IUserDao udao;
 	
 	@Override
-	public User validateUser(User u) {
+	public Object validateUser(User u) {
 		return udao.validateUser(u);
 	}
 	

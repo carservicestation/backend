@@ -3,6 +3,6 @@ package com.app.dao;
 import com.app.pojos.User;
 
 public interface IUserDao {
-	User validateUser(User u);
+	Object validateUser(User u);
 	User addUser(User u);
 }

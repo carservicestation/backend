@@ -16,6 +16,7 @@ public class Owner {
 	private String email;
 	private String phone;
 	private String password;
+	private Role role;
 	
 	private Address address;
 	private User user;
@@ -71,6 +72,7 @@ public class Owner {
 		this.phone = phone;
 	}
 
+	@JsonIgnore
 	@Column(length = 30, nullable = false)
 	public String getPassword() {
 		return password;
@@ -80,7 +82,17 @@ public class Owner {
 		this.password = password;
 	}
 	
-	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	public Address getAddress() {
 		return address;
 	}

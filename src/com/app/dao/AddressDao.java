@@ -21,6 +21,12 @@ public class AddressDao implements IAddressDao {
 		return sf.getCurrentSession().get(Address.class, aid);
 	}
 
+	@Override
+	public void removeAddressByAddressId(int aid) {
+		Address a = sf.getCurrentSession().get(Address.class, aid);
+		sf.getCurrentSession().remove(a);
+	}
+	
 	//----------------------------------------------------------------------------------------------
 	//OwnerAddress
 	//----------------------------------------------------------------------------------------------
@@ -69,14 +75,13 @@ public class AddressDao implements IAddressDao {
 		sf.getCurrentSession().update(sc);
 	}
 	
-	
 	//----------------------------------------------------------------------------------------------
 	//CustomerAddress
 	//----------------------------------------------------------------------------------------------
+	
 	@Override
-	public void addOrUpdateCustomerAddress(int cid, Address ca) {
+	public void addCustomerAddress(Integer cid, Address ca) {
 		Customer c = sf.getCurrentSession().get(Customer.class, cid);
-		c.getAddresses().size();
 		c.addAddress(ca);
 		sf.getCurrentSession().update(c);
 	}
@@ -89,11 +94,6 @@ public class AddressDao implements IAddressDao {
 	}
 
 	@Override
-	public Address getCustomerAddressByAddressId(int caid) {	
-		return sf.getCurrentSession().get(Address.class, caid);
-	}
-
-	@Override
 	public void removeCustomerAddress(int cid, int caid) {
 		Customer c = sf.getCurrentSession().get(Customer.class, cid);
 		Address ca = sf.getCurrentSession().get(Address.class, caid);
@@ -101,5 +101,7 @@ public class AddressDao implements IAddressDao {
 		c.removeAddress(ca);
 		sf.getCurrentSession().update(c);
 	}
+
+
 
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name="payment")
 public class Payment {
 
-	private Integer payId;
+	private Integer id;
 	private double amount;
 	private Appointment appointment;
 
@@ -20,12 +20,12 @@ public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="pay_id")
-	public Integer getPayId() {
-		return payId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setPayId(Integer payId) {
-		this.payId = payId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public double getAmount() {
@@ -48,7 +48,7 @@ public class Payment {
 
 	@Override
 	public String toString() {
-		return "Payment [payId=" + payId + ", amount=" + amount + "]";
+		return "Payment [payId=" + id + ", amount=" + amount + "]";
 	}
 
 }

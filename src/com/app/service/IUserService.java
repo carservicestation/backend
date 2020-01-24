@@ -4,7 +4,7 @@ import com.app.pojos.User;
 
 public interface IUserService {
 
-	User validateUser(User u);
+	Object validateUser(User u);
 
 	User addUser(User u);
 

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "appointment")
 public class Appointment {
 
-	private Integer apmtId;
+	private Integer id;
 	private Date datetime;
 	private Customer customer;
 	private ServiceCenter serviceCenter;
@@ -41,12 +41,12 @@ public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "apmt_id")
-	public Integer getApmtId() {
-		return apmtId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setApmtId(Integer apmtId) {
-		this.apmtId = apmtId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Date getDatetime() {

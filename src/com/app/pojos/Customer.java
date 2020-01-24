@@ -11,11 +11,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "customer")
 public class Customer {
 
-	private Integer custId;
+	private Integer id;
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
+	private Role role;
 
 	private User user;
 
@@ -36,14 +37,14 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cust_id")
-	public Integer getCustId() {
-		return custId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCustId(Integer custId) {
-		this.custId = custId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-
+	
 	@Column(length = 30)
 	public String getName() {
 		return name;
@@ -71,6 +72,7 @@ public class Customer {
 		this.phone = phone;
 	}
 
+	//@JsonIgnore
 	@Column(length = 30, nullable = false)
 	public String getPassword() {
 		return password;
@@ -80,6 +82,16 @@ public class Customer {
 		this.password = password;
 	}
 
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
 	@OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	@JsonIgnore
@@ -92,6 +104,7 @@ public class Customer {
 	}
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	public List<Address> getAddresses() {
 		return addresses;
 	}
@@ -112,7 +125,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [custId=" + custId + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password="
+		return "Customer [custId=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password="
 				+ password + "]";
 	}
 }

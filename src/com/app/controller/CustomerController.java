@@ -23,6 +23,8 @@ public class CustomerController {
 	@PostMapping("/addCustomer")
 	ResponseEntity<?> addCustomer( @RequestBody Customer c)
 	{
+		System.out.println(c.toString());
+		System.out.println("in cs");
 		return new ResponseEntity<Customer>(cs.addCustomer(c), HttpStatus.CREATED);
 	}
 }

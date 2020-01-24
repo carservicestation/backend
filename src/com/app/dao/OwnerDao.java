@@ -18,6 +18,7 @@ public class OwnerDao implements IOwnerDao {
 
 	@Override
 	public Owner addOwner(Owner o) {
+		o.setRole(Role.OWNER);
 		sf.getCurrentSession().save(o);
 		return o;
 	}

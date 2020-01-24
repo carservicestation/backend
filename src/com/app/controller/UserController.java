@@ -20,25 +20,21 @@ public class UserController {
 
 	@Autowired
 	private IUserService us;
-	
+
 	@PostMapping("/validate")
 	public ResponseEntity<?> validateUser(@RequestBody User u) {
 
-		User validUser = null;
-		try
-		{
+		Object validUser = null;
+		try {
 			validUser = us.validateUser(u);
 			System.out.println(u);
-			return new ResponseEntity<User>(validUser, HttpStatus.OK);// return object
+			return new ResponseEntity<Object>(validUser, HttpStatus.OK);// return object
+
 		}
-		
-		catch (RuntimeException e) 
-		{
-			//e.printStackTrace();
-			return new ResponseEntity<User>(validUser, HttpStatus.NOT_FOUND);// return null
+
+		catch (RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(validUser, HttpStatus.NOT_FOUND);// return null }
 		}
 	}
-	
-		
-
 }

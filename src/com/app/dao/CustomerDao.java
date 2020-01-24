@@ -14,6 +14,8 @@ public class CustomerDao implements ICustomerDao {
 
 	@Override
 	public Customer addCustomer(Customer c) {
+		System.out.println("cd");
+		c.setRole(Role.CUSTOMER);
 		sf.getCurrentSession().save(c);
 		return c;
 	}

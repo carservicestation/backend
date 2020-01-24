@@ -7,6 +7,13 @@ import com.app.pojos.Customer;
 
 public interface IAddressDao {
 
+	Address getAddressByAddressId(int aid);
+	
+	void removeAddressByAddressId(int aid);
+
+	
+	
+	
 	void addOrUpdateOwnerAddress(int oid, Address oa);
 
 	Address getOwnerAddressByOwnerId(int oid);
@@ -21,11 +28,12 @@ public interface IAddressDao {
 
 	void removeCustomerAddress(int cid, int caid);
 
-	void addOrUpdateCustomerAddress(int cid, Address ca);
-
-	Address getCustomerAddressByAddressId(int caid);
-
 	List<Address> getCustomerAddressesByCustomerId(int cid);
 
-	Address getAddressByAddressId(int aid);
+
+	void addCustomerAddress(Integer cid, Address ca);
+
+
+
+
 }

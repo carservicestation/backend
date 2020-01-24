@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "service")
 public class Service {
 
-	private Integer serviceId;
+	private Integer id;
 	private String name;
 	private String desc;
 	private double price;
@@ -32,12 +32,13 @@ public class Service {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getServiceId() {
-		return serviceId;
+	@Column(name = "service_id")
+	public Integer getId() {
+		return id;
 	}
 
-	public void setServiceId(Integer serviceId) {
-		this.serviceId = serviceId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(length = 30)
@@ -97,14 +98,14 @@ public class Service {
 
 	@Override
 	public String toString() {
-		return "Service [serviceId=" + serviceId + ", name=" + name + ", desc=" + desc + ", price=" + price + "]";
+		return "Service [serviceId=" + id + ", name=" + name + ", desc=" + desc + ", price=" + price + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -117,13 +118,14 @@ public class Service {
 		if (getClass() != obj.getClass())
 			return false;
 		Service other = (Service) obj;
-		if (serviceId == null) {
-			if (other.serviceId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!serviceId.equals(other.serviceId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
+	
 
 }

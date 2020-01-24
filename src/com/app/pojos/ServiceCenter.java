@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "center")
 public class ServiceCenter {
 
-	private Integer centerId;
+	private Integer id;
 	private String name;
 	private String email;
 	private String phone;
@@ -36,12 +36,12 @@ public class ServiceCenter {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "center_id")
-	public Integer getCenterId() {
-		return centerId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCenterId(Integer centerId) {
-		this.centerId = centerId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(length = 30)
@@ -136,14 +136,14 @@ public class ServiceCenter {
 	
 	@Override
 	public String toString() {
-		return "ServiceCenter [centerId=" + centerId + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
+		return "ServiceCenter [centerId=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((centerId == null) ? 0 : centerId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -156,14 +156,11 @@ public class ServiceCenter {
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceCenter other = (ServiceCenter) obj;
-		if (centerId == null) {
-			if (other.centerId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!centerId.equals(other.centerId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
-	
-
 }

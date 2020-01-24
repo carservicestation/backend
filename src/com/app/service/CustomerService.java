@@ -19,9 +19,11 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public Customer addCustomer(Customer c)
 	{
+		System.out.println("css");
+		System.out.println(c.toString());
 		User u = new User(c.getEmail(), c.getPassword(), Role.CUSTOMER);
 		User dbu = udao.addUser(u);
-		c.setUser(u);
+		c.setUser(dbu);
 		return cdao.addCustomer(c);	
 	}
 	

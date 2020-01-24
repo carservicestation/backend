@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "vehicle")
 public class Vehicle {
 
-	private Integer vehicleId;
+	private Integer id;
 	private String make;
 	private String model;
 	private Fuel fuelType;
@@ -23,12 +23,12 @@ public class Vehicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "vehicle_id")
-	public Integer getCarId() {
-		return vehicleId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCarId(Integer vehicleId) {
-		this.vehicleId = vehicleId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(length = 30)
@@ -61,7 +61,7 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-		return "Vehicle [vehicleId=" + vehicleId + ", make=" + make + ", model=" + model + ", fuelType=" + fuelType
+		return "Vehicle [vehicleId=" + id + ", make=" + make + ", model=" + model + ", fuelType=" + fuelType
 				+ "]";
 	}
 

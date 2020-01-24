@@ -32,20 +32,16 @@ public class AddressController {
 		System.out.println("in init " + adao);
 	}
 
-	@PostMapping("/addOrUpdateAddress/{role}/{ids}")
-	ResponseEntity<?> addOrUpdateAddress(@PathVariable String role, @PathVariable String ids, @RequestBody Address a) {
-		int id = Integer.parseInt(ids);
-
-		if (role.equals("CUSTOMER")) {
-			adao.addOrUpdateCustomerAddress(id, a);
-		} else if (role.equals("OWNER")) {
-			adao.addOrUpdateOwnerAddress(id, a);
-		} else if (role.equals("SERVICECENTER")) {
-			adao.addOrUpdateServiceCenterAddress(id, a);
-		}
-		return new ResponseEntity<>(HttpStatus.CREATED);
-	}
-
+	/*
+	 * @PostMapping("/addOrUpdateAddress/{role}/{ids}") ResponseEntity<?>
+	 * addOrUpdateAddress(@PathVariable String role, @PathVariable String
+	 * ids, @RequestBody Address a) { int id = Integer.parseInt(ids);
+	 * 
+	 * if (role.equals("CUSTOMER")) { adao.addOrUpdateCustomerAddress(id, a); } else
+	 * if (role.equals("OWNER")) { adao.addOrUpdateOwnerAddress(id, a); } else if
+	 * (role.equals("SERVICECENTER")) { adao.addOrUpdateServiceCenterAddress(id, a);
+	 * } return new ResponseEntity<>(HttpStatus.CREATED); }
+	 */
 	@GetMapping("/getAddressByAddressId/{ids}")
 	ResponseEntity<?> getAddressByAddressId(@PathVariable String ids) {
 		int aid = Integer.parseInt(ids);
@@ -106,9 +102,11 @@ public class AddressController {
 	//----------------------------------------------------------------------------------------------
 	//CustomerAddress
 	//----------------------------------------------------------------------------------------------	
-	@PostMapping("/addOrUpdateCustomerAddress")
-	ResponseEntity<?> addOrUpdateCustomerAddress(@RequestParam int cid, @RequestBody Address ca) {
-		adao.addOrUpdateCustomerAddress(cid, ca);
+	@PostMapping("/addCustomerAddress/{cid}")
+	ResponseEntity<?> addCustomerAddress(@PathVariable Integer cid, @RequestBody Address ca) {
+		
+		adao.addCustomerAddress(cid, ca);
+		
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
