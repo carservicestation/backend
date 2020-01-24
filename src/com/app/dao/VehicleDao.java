@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.pojos.Vehicle;
 
 @Repository
-@Transactional
 public class VehicleDao implements IVehicleDao {
 
 	@Autowired

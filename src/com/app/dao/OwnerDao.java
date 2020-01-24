@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.pojos.*;
 
 @Repository
-@Transactional
 public class OwnerDao implements IOwnerDao {
 
 	@Autowired

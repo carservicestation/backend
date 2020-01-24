@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.pojos.*;
 
 @Repository
-@Transactional
 public class ServiceCenterDao implements IServiceCenterDao {
 
 	@Autowired
