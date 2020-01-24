@@ -20,7 +20,7 @@ public class ServiceCenter {
 	private Owner owner;
 	private Address address;
 
-	private Set<Service> services = new HashSet<>();
+	private Set<Services> services = new HashSet<>();
 	
 	private List<Appointment> appointments = new ArrayList<>();
 
@@ -93,14 +93,15 @@ public class ServiceCenter {
 	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "center_service", joinColumns = @JoinColumn(name = "centre_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
-	public Set<Service> getServices() {
+	public Set<Services> getServices() {
 		return services;
 	}
 
-	public void setServices(Set<Service> services) {
+	public void setServices(Set<Services> services) {
 		this.services = services;
 	}
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "serviceCenter", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Appointment> getAppointments() {
 		return appointments;
@@ -110,13 +111,13 @@ public class ServiceCenter {
 		this.appointments = appointments;
 	}
 
-	public void addService(Service s)
+	public void addService(Services s)
 	{
 		this.services.add(s);
 		s.getServiceCenters().add(this);
 	}
 	
-	public void removeService(Service s)
+	public void removeService(Services s)
 	{
 		this.services.remove(s);
 		s.getServiceCenters().remove(this);

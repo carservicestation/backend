@@ -19,7 +19,7 @@ public class Appointment {
 	private Payment payment;
 	private Address pickupAddress;
 	
-	private Set<Service> services = new HashSet<>();
+	private Set<Services> services = new HashSet<>();
 
 	public Appointment() {
 	}
@@ -29,7 +29,7 @@ public class Appointment {
 	}
 
 	public Appointment(Date datetime, Customer customer, ServiceCenter serviceCenter, Vehicle vehicle, Payment payment,
-			Set<Service> services) {
+			Set<Services> services) {
 		this.datetime = datetime;
 		this.customer = customer;
 		this.serviceCenter = serviceCenter;
@@ -108,20 +108,20 @@ public class Appointment {
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "appointment_service", joinColumns = @JoinColumn(name = "apmt_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
-	public Set<Service> getServices() {
+	public Set<Services> getServices() {
 		return services;
 	}
 
-	public void setServices(Set<Service> services) {
+	public void setServices(Set<Services> services) {
 		this.services = services;
 	}
 
-	public void addService(Service s) {
+	public void addService(Services s) {
 		this.services.add(s);
 		s.getAppointments().add(this);
 	}
 	
-	public void removeService(Service s) {
+	public void removeService(Services s) {
 		this.services.remove(s);
 		s.getAppointments().remove(this);
 	}

@@ -26,6 +26,9 @@ public class CustomerService implements ICustomerService {
 		c.setUser(dbu);
 		return cdao.addCustomer(c);	
 	}
-	
-	
+
+	@Override
+	public void removeCustomer(int cid) {
+		cdao.removeCustomer(cid);
+	}
 }

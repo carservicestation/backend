@@ -102,9 +102,9 @@ public class Customer {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	
 	@JsonIgnore
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Address> getAddresses() {
 		return addresses;
 	}
@@ -130,6 +130,7 @@ public class Customer {
 	}
 }
 
+	
 /*
  * Online Car Service Station Car Service Station is an online application
  * through which you can search nearby Service Centers according to your

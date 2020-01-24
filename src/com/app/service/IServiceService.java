@@ -1,12 +1,12 @@
-package com.app.dao;
+package com.app.service;
 
 import java.util.List;
 import java.util.Set;
 
 import com.app.pojos.Services;
 
-public interface IServiceDao {
-
+public interface IServiceService {
+	
 	Services getServiceById(int sid);
 
 	void updateService(Services s);
@@ -20,5 +20,5 @@ public interface IServiceDao {
 	Set<Services> getServicesByServiceCenterId(int scid);
 
 	Set<Services> getServicesByAppointmentId(int apid);
-	
+
 }

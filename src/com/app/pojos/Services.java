@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "service")
-public class Service {
+public class Services {
 
 	private Integer id;
 	private String name;
@@ -20,10 +20,10 @@ public class Service {
 	private Set<ServiceCenter> serviceCenters = new HashSet<>();
 	private Set<Appointment> appointments = new HashSet<>();
 	
-	public Service() {
+	public Services() {
 	}
 
-	public Service(String name, String desc, double price) {
+	public Services(String name, String desc, double price) {
 
 		this.name = name;
 		this.desc = desc;
@@ -117,7 +117,7 @@ public class Service {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Service other = (Service) obj;
+		Services other = (Services) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

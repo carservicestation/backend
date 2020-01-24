@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.app.dao.IServiceDao;
-import com.app.pojos.Service;
+import com.app.pojos.Services;
+import com.app.service.IServiceService;
 
 @RestController
 @CrossOrigin
@@ -17,23 +16,23 @@ import com.app.pojos.Service;
 public class ServiceController {
 
 	@Autowired
-	private IServiceDao sdao;
+	private IServiceService service;
 
 	@PostMapping("/addService")
-	ResponseEntity<?> addService(@RequestBody Service s) {
-		return new ResponseEntity<Integer>(sdao.addService(s), HttpStatus.CREATED);
+	ResponseEntity<?> addService(@RequestBody Services s) {
+		return new ResponseEntity<Integer>(service.addService(s), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/getServiceById/{sid}")
 	ResponseEntity<?> getServiceById(@PathVariable(name = "sid") String sid) {
 		int i = Integer.parseInt(sid);
 		System.out.println("sid :" + sid);
-		return new ResponseEntity<Service>(sdao.getServiceById(i), HttpStatus.CREATED);
+		return new ResponseEntity<Services>(service.getServiceById(i), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/updateService")
-	ResponseEntity<?> updateService(@RequestBody Service s) {
-		sdao.updateService(s);
+	ResponseEntity<?> updateService(@RequestBody Services s) {
+		service.updateService(s);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -41,18 +40,23 @@ public class ServiceController {
 	ResponseEntity<?> removeService(@PathVariable(name = "sid") String sid) {
 		System.out.println("sid :" + sid);
 		int i = Integer.parseInt(sid);
-		sdao.removeService(i);
+		service.removeService(i);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@GetMapping("/getServices")
 	ResponseEntity<?> getServices() {
-		return new ResponseEntity<List<Service>>(sdao.getServices(), HttpStatus.OK);
+		return new ResponseEntity<List<Services>>(service.getServices(), HttpStatus.OK);
 	}
 
 	@GetMapping("/getServicesByServiceCenter")
 	ResponseEntity<?> getServicesByServiceCenter(@RequestParam int scid) {
-		return new ResponseEntity<Set<Service>>(sdao.getServicesByServiceCenterId(scid), HttpStatus.OK);
+		return new ResponseEntity<Set<Services>>(service.getServicesByServiceCenterId(scid), HttpStatus.OK);
+	}
+	
+	@GetMapping("/getServicesByAppointmentId")
+	ResponseEntity<?> getServicesByAppointmentId(@RequestParam int apid) {
+		return new ResponseEntity<Set<Services>>(service.getServicesByAppointmentId(apid), HttpStatus.OK);
 	}
 
 }

@@ -19,44 +19,45 @@ public class ServiceDao implements IServiceDao {
 	private SessionFactory sf;
 
 	@Override
-	public Integer addService(Service s) {
+	public Integer addService(Services s) {
 		return (Integer) sf.getCurrentSession().save(s);
 	}
 
 	
 	@Override
-	public Service getServiceById(int sid) {
-		return sf.getCurrentSession().get(Service.class, sid);
+	public Services getServiceById(int sid) {
+		return sf.getCurrentSession().get(Services.class, sid);
 	}
 
 	@Override
-	public void updateService(Service s) {
+	public void updateService(Services s) {
 		sf.getCurrentSession().update(s);
 	}
 
 	@Override
 	public void removeService(int sid) {
-		Service s = sf.getCurrentSession().get(Service.class, sid);
+		Services s = sf.getCurrentSession().get(Services.class, sid);
 		sf.getCurrentSession().remove(s);
 	}
 
 	@Override
-	public List<Service> getServices() {
+	public List<Services> getServices() {
 		/* services list for admin */
-		String jpql = "select s from Service s";
-		return (List<Service>) sf.getCurrentSession().createQuery(jpql, Service.class).getResultList();
+		
+		String jpql = "select s from Services s";
+		return (List<Services>) sf.getCurrentSession().createQuery(jpql, Services.class).getResultList();
 	}
 
 	
 	@Override
-	public Set<Service> getServicesByServiceCenterId(int scid) {
+	public Set<Services> getServicesByServiceCenterId(int scid) {
 		ServiceCenter sc = sf.getCurrentSession().get(ServiceCenter.class, scid);
 		sc.getServices().size();
 		return sc.getServices();
 	}
 	
 	@Override
-	public Set<Service> getServicesByAppointmentId(int apid) {
+	public Set<Services> getServicesByAppointmentId(int apid) {
 		Appointment ap = sf.getCurrentSession().get(Appointment.class, apid);
 		ap.getServices().size();
 		return ap.getServices();

@@ -111,7 +111,7 @@ public class Address{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="center_id")
 	public ServiceCenter getServiceCenter() {
@@ -121,7 +121,7 @@ public class Address{
 	public void setServiceCenter(ServiceCenter serviceCenter) {
 		this.serviceCenter = serviceCenter;
 	}
-	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="owner_id")
 	public Owner getOwner() {
