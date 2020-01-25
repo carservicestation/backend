@@ -17,6 +17,8 @@ public interface IVehicleDao {
 
 	void removeVehicle(int vid);
 
+	List<String> getDistinctVehicleMakes();
+
 	
 
 }

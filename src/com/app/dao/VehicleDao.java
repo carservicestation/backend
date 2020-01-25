@@ -43,4 +43,26 @@ public class VehicleDao implements IVehicleDao {
 		String jpql = "select v from Vehicle v";
 		return (List<Vehicle>) sf.getCurrentSession().createQuery(jpql, Vehicle.class).getResultList();
 	}
+
+	@Override
+	public List<String> getDistinctVehicleMakes() 
+	{
+		String jpql = "select distinct v.make from Vehicle v";
+		return (List<String>) sf.getCurrentSession().createQuery(jpql, String.class).getResultList();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

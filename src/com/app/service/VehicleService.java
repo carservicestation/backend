@@ -41,4 +41,9 @@ public class VehicleService implements IVehicleService {
 		dao.removeVehicle(vid);
 	}
 
+	@Override
+	public List<String> getDistinctVehicleMakes() {
+		return dao.getDistinctVehicleMakes();
+	}
+
 }

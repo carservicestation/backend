@@ -16,4 +16,6 @@ public interface IVehicleService {
 
 	void removeVehicle(int vid);
 
+	List<String> getDistinctVehicleMakes();
+
 }
