@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "owner")
 public class Owner {
 
-	private Integer ownerId;
+	private Integer id;
 	private String name;
 	private String email;
 	private String phone;
@@ -37,19 +37,19 @@ public class Owner {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="owner_id")
-	public Integer getOwnerId() {
-		return ownerId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setOwnerId(Integer ownerId) {
-		this.ownerId = ownerId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(length = 30)
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -72,7 +72,6 @@ public class Owner {
 		this.phone = phone;
 	}
 
-	@JsonIgnore
 	@Column(length = 30, nullable = false)
 	public String getPassword() {
 		return password;
@@ -148,7 +147,7 @@ public class Owner {
 	
 	@Override
 	public String toString() {
-		return "Owner [ownerId=" + ownerId + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password="
+		return "Owner [ownerId=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password="
 				+ password + "]";
 	}
 	

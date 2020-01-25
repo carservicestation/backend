@@ -39,6 +39,7 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public User addUser(User u) {
+		System.out.println(u);
 		System.out.println("ud");
 		sf.getCurrentSession().save(u);
 		return u;

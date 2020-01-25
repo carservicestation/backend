@@ -23,6 +23,7 @@ public class OwnerController {
 
 	@PostMapping("/addOwner")
 	ResponseEntity<?> addOwner(@RequestBody Owner o) {
+		System.out.println(o.toString());
 		return new ResponseEntity<Owner>(os.addOwner(o), HttpStatus.CREATED);
 	}
 
