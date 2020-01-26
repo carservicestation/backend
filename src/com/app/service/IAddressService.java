@@ -16,6 +16,5 @@ public interface IAddressService {
 
 	Address getAddressByAddressId(int aid);
 
-	void addCustomerAddress(int cid, Address ca);
 
 }

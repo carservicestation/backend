@@ -27,10 +27,8 @@ public class OwnerService implements IOwnerService {
 	public Owner addOwner(Owner o)
 	{
 		User u = new User(o.getEmail(), o.getPassword(), Role.OWNER);
-		System.out.println("os");
-		System.out.println(u);
-		User dbu = udao.addUser(u);
-		o.setUser(dbu);
+		udao.addUser(u);
+		o.setUser(u);
 		return odao.addOwner(o);	
 	}
 	

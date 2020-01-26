@@ -2,7 +2,11 @@ package com.app.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,9 +50,24 @@ public class ServiceCenterDao implements IServiceCenterDao {
 	
 	@Override
 	public List<ServiceCenter> getServiceCenters() {
-		/* service centers list for admin */
-		String jpql = "select sc from ServiceCenter sc";
-		return (List<ServiceCenter>) sf.getCurrentSession().createQuery(jpql, ServiceCenter.class).getResultList();
+		
+		Session session = sf.getCurrentSession();
+		
+		Criteria cr = session.createCriteria(ServiceCenter.class)
+			    .setProjection(Projections.projectionList()
+			      .add(Projections.property("id"), "id")
+			      .add(Projections.property("name"), "name")
+			      .add(Projections.property("email"), "email")
+				  .add(Projections.property("phone"), "phone"))
+			    .setResultTransformer(Transformers.aliasToBean(ServiceCenter.class));
+
+				List<ServiceCenter> ssl = cr.list();
+
+	//		String jpql = "select sc.id, sc.name, sc.email, sc.phone from ServiceCenter sc";
+		
+	//	List<ServiceCenter> list = (List<ServiceCenter>) sf.getCurrentSession().createQuery(jpql).getResultList();
+		 
+		return ssl;
 	}
 
 }

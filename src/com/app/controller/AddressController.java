@@ -59,11 +59,7 @@ public class AddressController {
 	//----------------------------------------------------------------------------------------------
 	//CustomerAddress
 	//----------------------------------------------------------------------------------------------	
-	@PostMapping("/addCustomerAddress/{cid}")
-	ResponseEntity<?> addCustomerAddress(@PathVariable Integer cid, @RequestBody Address ca) {
-		service.addCustomerAddress(cid, ca);
-		return new ResponseEntity<>(HttpStatus.CREATED);
-	}
+	
 
 	@GetMapping("/getCustomerAddressesByCustomerId/{cid}")
 	ResponseEntity<?> getCustomerAddressesByCustomerId(@PathVariable Integer cid) {

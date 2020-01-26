@@ -111,6 +111,7 @@ public class Customer {
 		this.address = address;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Appointment> getAppointments() {
 		return appointments;

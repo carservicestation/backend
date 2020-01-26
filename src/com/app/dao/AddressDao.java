@@ -51,13 +51,6 @@ public class AddressDao implements IAddressDao {
 	// ----------------------------------------------------------------------------------------------
 
 	@Override
-	public void addCustomerAddress(Integer cid, Address ca) {
-		Customer c = sf.getCurrentSession().get(Customer.class, cid);
-		c.setAddress(ca);
-		sf.getCurrentSession().update(c);
-	}
-
-	@Override
 	public Address getCustomerAddressesByCustomerId(int cid) {
 		Customer c = sf.getCurrentSession().get(Customer.class, cid);
 		return c.getAddress();

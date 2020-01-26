@@ -40,7 +40,6 @@ public class OwnerDao implements IOwnerDao {
 
 	@Override
 	public List<Owner> getAllOwners() {
-		/* owners list for admin */
 		String jpql = "select o from Owner o";
 		return (List<Owner>) sf.getCurrentSession().createQuery(jpql, Owner.class).getResultList();
 	}

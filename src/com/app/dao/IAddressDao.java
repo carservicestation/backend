@@ -22,6 +22,4 @@ public interface IAddressDao {
 
 	Address getCustomerAddressesByCustomerId(int cid);
 
-	void addCustomerAddress(Integer cid, Address ca);
-
 }

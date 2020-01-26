@@ -20,7 +20,9 @@ public class AppointmentController {
 	
 	@PostMapping(value = "/addAppointment", consumes = "application/json", produces = "application/json")
 	public Integer addAppointment(@RequestBody Appointment a) {
+		
 		System.out.println(a);
+		
 		return s.addAppointment(a);
 	}
 

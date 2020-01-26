@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "center")
@@ -74,6 +75,7 @@ public class ServiceCenter {
 	//--------------------------------------------------------------------------------------
 	//OWNER
 	//--------------------------------------------------------------------------------------
+	//@JsonIgnore
 	@OneToOne(mappedBy = "serviceCenter",cascade = CascadeType.ALL, orphanRemoval = true)
 	public Owner getOwner() {
 		return owner;
@@ -93,7 +95,7 @@ public class ServiceCenter {
 		o.setServiceCenter(null);
 	}
 	//--------------------------------------------------------------------------------------
-	
+	//@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="addr_id")
 	public Address getAddress() {
@@ -106,7 +108,7 @@ public class ServiceCenter {
 	//--------------------------------------------------------------------------------------
 	//SERVICES
 	//--------------------------------------------------------------------------------------
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "center_service", joinColumns = @JoinColumn(name = "centre_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
 	public Set<Services> getServices() {
@@ -130,10 +132,7 @@ public class ServiceCenter {
 	}
 	//--------------------------------------------------------------------------------------
 
-	@Override
-	public String toString() {
-		return "ServiceCenter [centerId=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -141,6 +140,12 @@ public class ServiceCenter {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceCenter [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", owner="
+				+ owner + ", address=" + address + ", services=" + services + "]";
 	}
 
 	@Override

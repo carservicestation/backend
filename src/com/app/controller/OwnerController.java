@@ -44,7 +44,7 @@ public class OwnerController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/getAllOwners")/*C*/
+	@GetMapping(value="/getAllOwners", produces = "application/json")/*C*/
 	ResponseEntity<?> getAllOwners() {
 		return new ResponseEntity<List<Owner>>(os.getAllOwners(), HttpStatus.OK);
 	}

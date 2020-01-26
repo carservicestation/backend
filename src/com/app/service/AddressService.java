@@ -38,11 +38,6 @@ public class AddressService implements IAddressService {
 	}
 
 	@Override
-	public void addCustomerAddress(int cid, Address ca) {
-		dao.addCustomerAddress(cid, ca);
-	}
-
-	@Override
 	public Address getAddressByAddressId(int aid) {
 		return dao.getAddressByAddressId(aid);
 	}

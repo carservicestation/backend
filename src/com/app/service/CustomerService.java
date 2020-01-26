@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +21,6 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public Customer addCustomer(Customer c)
 	{
-		System.out.println("css");
-		System.out.println(c.toString());
 		User u = new User(c.getEmail(), c.getPassword(), Role.CUSTOMER);
 		User dbu = udao.addUser(u);
 		c.setUser(dbu);
@@ -28,7 +28,28 @@ public class CustomerService implements ICustomerService {
 	}
 
 	@Override
+	public Customer getCustomerById(int cid) {
+		return cdao.getCustomerById(cid);
+	}
+
+	@Override
+	public void updateCustomer(Customer c) {
+		cdao.updateCustomer(c);
+	}
+	
+	@Override
+	public List<Customer> getAllCustomers() {
+		return cdao.getAllCustomers();
+	}	
+	
+	@Override
 	public void removeCustomer(int cid) {
 		cdao.removeCustomer(cid);
 	}
+	
+	@Override
+	public void addCustomerAddress(Integer cid, Address ca) {
+		cdao.addCustomerAddress(cid, ca);
+	}
+
 }

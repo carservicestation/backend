@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -17,9 +18,20 @@ public class ServiceCenterController {
 	@Autowired
 	private IServiceCenterService service;
 	
-	@GetMapping("/addServiceCenter")
+	@PostMapping(value="/addServiceCenter",consumes = "application/json",produces = "application/json")
 	ResponseEntity<?> addServiceCenter(@RequestBody ServiceCenter sc)
 	{
+		System.out.println(sc.toString());
+
+		
+		Owner o = sc.getOwner();
+		o.setServiceCenter(sc);
+		
+		Set<Services> l = sc.getServices();
+		
+		sc.getServices().addAll(l);
+		
+		System.out.println(sc.toString());
 		return new ResponseEntity<Integer>(service.addServiceCenter(sc), HttpStatus.OK);
 	}
 	
@@ -42,7 +54,7 @@ public class ServiceCenterController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/getServiceCenters")
+	@GetMapping(value="/getServiceCenters", produces = "application/json")
 	ResponseEntity<?> getServiceCenters()
 	{
 		return new ResponseEntity<List<ServiceCenter>>(service.getServiceCenters(), HttpStatus.OK);

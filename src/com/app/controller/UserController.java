@@ -1,6 +1,5 @@
 package com.app.controller;
 
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.app.dao.IUserDao;
 import com.app.pojos.User;
 import com.app.service.IUserService;
 
@@ -21,20 +19,17 @@ public class UserController {
 	@Autowired
 	private IUserService us;
 
-	@PostMapping("/validate")
+	@PostMapping(value = "/validate", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> validateUser(@RequestBody User u) {
 
-		Object validUser = null;
-		try {
-			validUser = us.validateUser(u);
-			System.out.println(u);
-			return new ResponseEntity<Object>(validUser, HttpStatus.OK);// return object
-
+		try 
+		{
+			return new ResponseEntity<Object>(us.validateUser(u), HttpStatus.OK);// return object
 		}
 
 		catch (RuntimeException e) {
 			e.printStackTrace();
-			return new ResponseEntity<Object>(validUser, HttpStatus.NOT_FOUND);// return null }
+			return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND);// return null }
 		}
 	}
 }
