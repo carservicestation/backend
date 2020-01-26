@@ -51,6 +51,6 @@ public class ServiceCenterController {
 	@GetMapping("/getServiceCentersByOwnerId")
 	ResponseEntity<?> getServiceCentersByOwnerId(int oid)
 	{
-		return new ResponseEntity<List<ServiceCenter>>(service.getServiceCentersByOwnerId(oid), HttpStatus.OK);
+		return new ResponseEntity<ServiceCenter>(service.getServiceCentersByOwnerId(oid), HttpStatus.OK);
 	}
 }

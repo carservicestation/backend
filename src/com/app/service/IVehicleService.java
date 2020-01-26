@@ -18,4 +18,6 @@ public interface IVehicleService {
 
 	List<String> getDistinctVehicleMakes();
 
+	List<String> getModelsByVehicleMakes(String make);
+
 }

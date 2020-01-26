@@ -17,12 +17,13 @@ public class ServiceCenter {
 	private String name;
 	private String email;
 	private String phone;
-	private Owner owner;
-	private Address address;
-
-	private Set<Services> services = new HashSet<>();
 	
-	private List<Appointment> appointments = new ArrayList<>();
+	private Owner owner;  //2 way
+	private Address address; //1 way
+
+	private Set<Services> services = new HashSet<>();  //1 way
+	
+	private List<Appointment> appointments = new ArrayList<>(); //2way done
 
 	public ServiceCenter() {
 	}
@@ -42,7 +43,7 @@ public class ServiceCenter {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
+	}	
 
 	@Column(length = 30)
 	public String getName() {
@@ -70,18 +71,10 @@ public class ServiceCenter {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	@OneToOne(mappedBy = "serviceCenter", cascade = CascadeType.ALL, orphanRemoval = true)
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "owner_id")
+	//--------------------------------------------------------------------------------------
+	//OWNER
+	//--------------------------------------------------------------------------------------
+	@OneToOne(mappedBy = "serviceCenter",cascade = CascadeType.ALL, orphanRemoval = true)
 	public Owner getOwner() {
 		return owner;
 	}
@@ -89,7 +82,30 @@ public class ServiceCenter {
 	public void setOwner(Owner owner) {
 		this.owner = owner;
 	}
+	
+	public void addOwner(Owner o) {
+		this.setOwner(o);
+		o.setServiceCenter(this);
+	}
+	
+	public void removeOwner(Owner o) {
+		this.setOwner(null);
+		o.setServiceCenter(null);
+	}
+	//--------------------------------------------------------------------------------------
+	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="addr_id")
+	public Address getAddress() {
+		return address;
+	}
 
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	//--------------------------------------------------------------------------------------
+	//SERVICES
+	//--------------------------------------------------------------------------------------
 	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "center_service", joinColumns = @JoinColumn(name = "centre_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
@@ -100,7 +116,9 @@ public class ServiceCenter {
 	public void setServices(Set<Services> services) {
 		this.services = services;
 	}
-	
+	//--------------------------------------------------------------------------------------
+	//Appointment
+	//--------------------------------------------------------------------------------------
 	@JsonIgnore
 	@OneToMany(mappedBy = "serviceCenter", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Appointment> getAppointments() {
@@ -110,31 +128,8 @@ public class ServiceCenter {
 	public void setAppointments(List<Appointment> appointments) {
 		this.appointments = appointments;
 	}
+	//--------------------------------------------------------------------------------------
 
-	public void addService(Services s)
-	{
-		this.services.add(s);
-		s.getServiceCenters().add(this);
-	}
-	
-	public void removeService(Services s)
-	{
-		this.services.remove(s);
-		s.getServiceCenters().remove(this);
-	}
-	
-	public void addAddress(Address a)
-	{
-		this.setAddress(a);
-		a.setServiceCenter(this);
-	}
-	
-	public void removeAddress()
-	{
-		this.setAddress(null);
-		this.address.setServiceCenter(null);
-	}
-	
 	@Override
 	public String toString() {
 		return "ServiceCenter [centerId=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";

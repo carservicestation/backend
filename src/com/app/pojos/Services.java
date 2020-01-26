@@ -1,12 +1,6 @@
-
 package com.app.pojos;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "service")
@@ -17,8 +11,6 @@ public class Services {
 	private String desc;
 	private double price;
 	private byte[] image;
-	private Set<ServiceCenter> serviceCenters = new HashSet<>();
-	private Set<Appointment> appointments = new HashSet<>();
 	
 	public Services() {
 	}
@@ -74,26 +66,6 @@ public class Services {
 
 	public void setImage(byte[] image) {
 		this.image = image;
-	}
-
-	@ManyToMany(mappedBy = "services")
-	@JsonIgnore
-	public Set<ServiceCenter> getServiceCenters() {
-		return serviceCenters;
-	}
-
-	public void setServiceCenters(Set<ServiceCenter> serviceCenters) {
-		this.serviceCenters = serviceCenters;
-	}
-	
-	@ManyToMany(mappedBy = "services")
-	@JsonIgnore
-	public Set<Appointment> getAppointments() {
-		return appointments;
-	}
-
-	public void setAppointments(Set<Appointment> appointments) {
-		this.appointments = appointments;
 	}
 
 	@Override

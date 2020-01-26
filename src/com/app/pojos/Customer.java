@@ -17,10 +17,9 @@ public class Customer {
 	private String phone;
 	private String password;
 	private Role role;
-
 	private User user;
-
-	private List<Address> addresses = new ArrayList<>();
+	private Address address;
+	private List<Appointment> appointments = new ArrayList<>();
 
 	public Customer() {
 
@@ -72,7 +71,6 @@ public class Customer {
 		this.phone = phone;
 	}
 
-	//@JsonIgnore
 	@Column(length = 30, nullable = false)
 	public String getPassword() {
 		return password;
@@ -103,24 +101,23 @@ public class Customer {
 		this.user = user;
 	}
 	
-	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="addr_id")
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<Address> getAddresses() {
-		return addresses;
+	public List<Appointment> getAppointments() {
+		return appointments;
 	}
 
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
-
-	public void addAddress(Address ca) {
-		this.addresses.add(ca);
-		ca.setCustomer(this);
-	}
-
-	public void removeAddress(Address ca) {
-		this.addresses.remove(ca);
-		ca.setCustomer(null);
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 
 	@Override

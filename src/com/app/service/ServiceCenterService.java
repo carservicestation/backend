@@ -44,8 +44,8 @@ public class ServiceCenterService implements IServiceCenterService {
 	}
 
 	@Override
-	public List<ServiceCenter> getServiceCentersByOwnerId(int oid) {
-		return dao.getServiceCentersByOwnerId(oid);
+	public ServiceCenter getServiceCentersByOwnerId(int oid) {
+		return dao.getServiceCenterByOwnerId(oid);
 	}
 
 }

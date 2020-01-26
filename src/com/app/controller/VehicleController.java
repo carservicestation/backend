@@ -34,8 +34,7 @@ public class VehicleController {
 	@PostMapping("/getModelsByVehicleMakes")
 	ResponseEntity<?> getModelsByVehicleMakes(@RequestBody String make)
 	{
-		System.out.println("ff");
-		return new ResponseEntity<List<String>>(service.getDistinctVehicleMakes(), HttpStatus.OK);
+		return new ResponseEntity<List<String>>(service.getModelsByVehicleMakes(make), HttpStatus.OK);
 	}
 	
 	@PostMapping("/addVehicle")

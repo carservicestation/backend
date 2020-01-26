@@ -1,4 +1,3 @@
-
 package com.app.pojos;
 
 import java.util.Date;
@@ -13,29 +12,15 @@ public class Appointment {
 
 	private Integer id;
 	private Date datetime;
-	private Customer customer;
-	private ServiceCenter serviceCenter;
-	private Vehicle vehicle;
-	private Payment payment;
-	private Address pickupAddress;
+
+	private Customer customer;							//2 way
+	private Vehicle vehicle;							//1 way
+	private Address pickupAddress;						//1 way
+	private ServiceCenter serviceCenter;				//2 way
+	private Set<Services> services = new HashSet<>();	//1 way
+	private Payment payment;							//2 way
 	
-	private Set<Services> services = new HashSet<>();
-
 	public Appointment() {
-	}
-
-	public Appointment(Date datetime) {
-		this.datetime = datetime;
-	}
-
-	public Appointment(Date datetime, Customer customer, ServiceCenter serviceCenter, Vehicle vehicle, Payment payment,
-			Set<Services> services) {
-		this.datetime = datetime;
-		this.customer = customer;
-		this.serviceCenter = serviceCenter;
-		this.vehicle = vehicle;
-		this.payment = payment;
-		this.services = services;
 	}
 
 	@Id
@@ -56,8 +41,10 @@ public class Appointment {
 	public void setDatetime(Date datetime) {
 		this.datetime = datetime;
 	}
-
-	@OneToOne
+	//---------------------------------------------------------------------------------------------
+	//CUSTOMER
+	//---------------------------------------------------------------------------------------------
+	@ManyToOne
 	@JoinColumn(name = "cust_id")
 	public Customer getCustomer() {
 		return customer;
@@ -66,17 +53,19 @@ public class Appointment {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
-	@OneToOne
-	@JoinColumn(name = "center_id")
-	public ServiceCenter getServiceCenter() {
-		return serviceCenter;
+	
+	public void addCustomer(Customer c) {
+		this.setCustomer(c);
+		c.getAppointments().add(this);
 	}
 
-	public void setServiceCenter(ServiceCenter serviceCenter) {
-		this.serviceCenter = serviceCenter;
+	public void removeCustomer(Customer c) {
+		this.setCustomer(null);
+		c.getAppointments().remove(this);
 	}
-
+	//---------------------------------------------------------------------------------------------
+	//VEHICLE
+	//---------------------------------------------------------------------------------------------
 	@OneToOne
 	@JoinColumn(name = "vehicle_id")
 	public Vehicle getVehicle() {
@@ -86,16 +75,9 @@ public class Appointment {
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
-
-	@OneToOne(mappedBy = "appointment")
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-
+	//---------------------------------------------------------------------------------------------
+	//PICKUP ADDRESS
+	//---------------------------------------------------------------------------------------------
 	@ManyToOne
 	@JoinColumn(name="addr_id")
 	public Address getPickupAddress() {
@@ -105,25 +87,17 @@ public class Appointment {
 	public void setPickupAddress(Address pickupAddress) {
 		this.pickupAddress = pickupAddress;
 	}
-
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "appointment_service", joinColumns = @JoinColumn(name = "apmt_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
-	public Set<Services> getServices() {
-		return services;
+	//---------------------------------------------------------------------------------------------
+	//SERVICE CENTER
+	//---------------------------------------------------------------------------------------------
+	@OneToOne
+	@JoinColumn(name = "center_id")
+	public ServiceCenter getServiceCenter() {
+		return serviceCenter;
 	}
 
-	public void setServices(Set<Services> services) {
-		this.services = services;
-	}
-
-	public void addService(Services s) {
-		this.services.add(s);
-		s.getAppointments().add(this);
-	}
-	
-	public void removeService(Services s) {
-		this.services.remove(s);
-		s.getAppointments().remove(this);
+	public void setServiceCenter(ServiceCenter serviceCenter) {
+		this.serviceCenter = serviceCenter;
 	}
 
 	public void addServiceCenter(ServiceCenter sc) {
@@ -135,10 +109,46 @@ public class Appointment {
 		this.setServiceCenter(null);
 		sc.getAppointments().remove(this);
 	}
+	//---------------------------------------------------------------------------------------------
+	//SERVICES
+	//---------------------------------------------------------------------------------------------
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "appointment_service", joinColumns = @JoinColumn(name = "apmt_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
+	public Set<Services> getServices() {
+		return services;
+	}
+
+	public void setServices(Set<Services> services) {
+		this.services = services;
+	}
+	//---------------------------------------------------------------------------------------------
+	//PAYMENT
+	//---------------------------------------------------------------------------------------------
+	@OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+	public void addPayment(Payment p) {
+		this.setPayment(p);
+		p.setAppointment(this);
+	}
+
+	public void removePayment(Payment p) {
+		this.setPayment(null);
+		p.setAppointment(null);
+	}
+	//---------------------------------------------------------------------------------------------
 
 	@Override
 	public String toString() {
-		return "Appointment [datetime=" + datetime + "]";
+		return "Appointment [id=" + id + ", datetime=" + datetime + ", customer=" + customer + ", serviceCenter="
+				+ serviceCenter + ", vehicle=" + vehicle + ", payment=" + payment + ", pickupAddress=" + pickupAddress
+				+ ", services=" + services + "]";
 	}
 
 }

@@ -13,9 +13,9 @@ public interface IServiceCenterService {
 	ServiceCenter getServiceCenterById(int scid);
 
 	void updateServiceCenter(ServiceCenter sc);
+	
+	ServiceCenter getServiceCentersByOwnerId(int oid);
 
 	List<ServiceCenter> getServiceCenters();
-
-	List<ServiceCenter> getServiceCentersByOwnerId(int oid);
 
 }

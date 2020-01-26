@@ -1,11 +1,8 @@
 package com.app.dao;
 
-import java.util.List;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.app.pojos.*;
 
@@ -24,30 +21,6 @@ public class AddressDao implements IAddressDao {
 	public void removeAddressByAddressId(int aid) {
 		Address a = sf.getCurrentSession().get(Address.class, aid);
 		sf.getCurrentSession().remove(a);
-	}
-
-	// ----------------------------------------------------------------------------------------------
-	// OwnerAddress
-	// ----------------------------------------------------------------------------------------------
-
-	@Override
-	public Address getOwnerAddressByOwnerId(int oid) {
-		Owner o = sf.getCurrentSession().get(Owner.class, oid);
-		return o.getAddress();
-	}
-
-	@Override
-	public void addOrUpdateOwnerAddress(int oid, Address oa) {
-		Owner o = sf.getCurrentSession().get(Owner.class, oid);
-		o.addAddress(oa);
-		sf.getCurrentSession().update(o);
-	}
-
-	@Override
-	public void removeOwnerAddress(int oid) {
-		Owner o = sf.getCurrentSession().get(Owner.class, oid);
-		o.removeAddress();
-		sf.getCurrentSession().update(o);
 	}
 
 	// ----------------------------------------------------------------------------------------------
@@ -80,32 +53,20 @@ public class AddressDao implements IAddressDao {
 	@Override
 	public void addCustomerAddress(Integer cid, Address ca) {
 		Customer c = sf.getCurrentSession().get(Customer.class, cid);
-		c.addAddress(ca);
+		c.setAddress(ca);
 		sf.getCurrentSession().update(c);
 	}
 
 	@Override
-	public List<Address> getCustomerAddressesByCustomerId(int cid) {
-
-		System.out.println(cid);
-
+	public Address getCustomerAddressesByCustomerId(int cid) {
 		Customer c = sf.getCurrentSession().get(Customer.class, cid);
-
-		c.getAddresses().size();
-
-		List<Address> la = c.getAddresses();
-
-		System.out.println(la);
-
-		return la;
+		return c.getAddress();
 	}
 
 	@Override
-	public void removeCustomerAddress(int cid, int caid) {
+	public void removeCustomerAddress(int cid) {
 		Customer c = sf.getCurrentSession().get(Customer.class, cid);
-		Address ca = sf.getCurrentSession().get(Address.class, caid);
-		c.getAddresses().size();
-		c.removeAddress(ca);
+		c.setAddress(null);
 		sf.getCurrentSession().update(c);
 	}
 

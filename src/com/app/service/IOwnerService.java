@@ -19,6 +19,4 @@ public interface IOwnerService {
 
 	List<Owner> getAllOwners();
 
-	List<ServiceCenter> getServiceCentersByOwner(int oid);
-
 }

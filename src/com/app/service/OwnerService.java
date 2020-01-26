@@ -52,10 +52,5 @@ public class OwnerService implements IOwnerService {
 	@Override
 	public List<Owner> getAllOwners() {
 		return odao.getAllOwners();
-	}
-		
-	@Override
-	public List<ServiceCenter> getServiceCentersByOwner(int oid) {
-		return odao.getServiceCentersByOwner(oid);
 	}	
 }

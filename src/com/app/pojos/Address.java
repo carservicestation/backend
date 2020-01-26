@@ -1,10 +1,6 @@
 package com.app.pojos;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "address")
@@ -17,15 +13,7 @@ public class Address{
 	private String pincode;
 	private String state;
 	private String country;
-	
-	private Customer customer;
-	
-	private ServiceCenter serviceCenter;
-	
-	private Owner owner;
-	
-	private List<Appointment> appointments = new ArrayList<>();
-	
+		
 	public Address() {
 	}
 	
@@ -92,6 +80,7 @@ public class Address{
 	public void setState(String state) {
 		this.state = state;
 	}
+	
 	@Column(length=20)
 	public String getCountry() {
 		return country;
@@ -99,59 +88,6 @@ public class Address{
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="cust_id")
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name="center_id")
-	public ServiceCenter getServiceCenter() {
-		return serviceCenter;
-	}
-
-	public void setServiceCenter(ServiceCenter serviceCenter) {
-		this.serviceCenter = serviceCenter;
-	}
-	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name="owner_id")
-	public Owner getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Owner owner) {
-		this.owner = owner;
-	}
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "pickupAddress", cascade = CascadeType.PERSIST)
-	public List<Appointment> getAppointments() {
-		return appointments;
-	}
-
-	public void setAppointments(List<Appointment> appointments) {
-		this.appointments = appointments;
-	}
-
-	public void addAppointment(Appointment ap)
-	{
-		this.appointments.add(ap);
-		ap.setPickupAddress(this);
-	}
-
-	public void removeAppointment(Appointment ap)
-	{
-		this.appointments.remove(ap);
-		ap.setPickupAddress(null);
 	}	
 	
 	@Override

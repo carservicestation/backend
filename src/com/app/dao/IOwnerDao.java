@@ -15,7 +15,5 @@ public interface IOwnerDao {
 	void removeOwner(int oid);
 
 	List<Owner> getAllOwners();
-
-	List<ServiceCenter> getServiceCentersByOwner(int oid);
 	
 }

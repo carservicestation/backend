@@ -44,16 +44,4 @@ public class OwnerDao implements IOwnerDao {
 		String jpql = "select o from Owner o";
 		return (List<Owner>) sf.getCurrentSession().createQuery(jpql, Owner.class).getResultList();
 	}
-
-	
-		
-	@Override
-	public List<ServiceCenter> getServiceCentersByOwner(int oid) {
-		/* list of service centers owned by owner */
-		Owner o = sf.getCurrentSession().get(Owner.class, oid);
-		o.getServiceCenters().size();
-		return o.getServiceCenters();
-	}
-
-
 }

@@ -19,6 +19,8 @@ public interface IVehicleDao {
 
 	List<String> getDistinctVehicleMakes();
 
+	List<String> getModelsByVehicleMakes(String make);
+
 	
 
 }

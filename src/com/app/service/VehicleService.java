@@ -46,4 +46,9 @@ public class VehicleService implements IVehicleService {
 		return dao.getDistinctVehicleMakes();
 	}
 
+	@Override
+	public List<String> getModelsByVehicleMakes(String make) {
+		return dao.getModelsByVehicleMakes(make);
+	}
+
 }

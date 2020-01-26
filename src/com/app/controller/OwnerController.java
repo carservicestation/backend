@@ -48,10 +48,4 @@ public class OwnerController {
 	ResponseEntity<?> getAllOwners() {
 		return new ResponseEntity<List<Owner>>(os.getAllOwners(), HttpStatus.OK);
 	}
-	
-	@PostMapping("/getServiceCentersByOwner")
-	ResponseEntity<?> getServiceCentersByOwner( @RequestParam int oid)
-	{
-		return new ResponseEntity<List<ServiceCenter>>(os.getServiceCentersByOwner(oid),HttpStatus.OK);
-	}
 }

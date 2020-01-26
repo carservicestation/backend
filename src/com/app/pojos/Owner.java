@@ -1,8 +1,5 @@
 package com.app.pojos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,16 +15,13 @@ public class Owner {
 	private String password;
 	private Role role;
 	
-	private Address address;
 	private User user;
-	
-	private List<ServiceCenter> serviceCenters = new ArrayList<>();
+	private ServiceCenter serviceCenter;  //2 way done
 	
 	public Owner() {
 	}
 
 	public Owner(String name, String email, String phone, String password) {
-	
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
@@ -91,15 +85,6 @@ public class Owner {
 		this.role = role;
 	}
 
-	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	
 	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	@JsonIgnore
@@ -111,40 +96,16 @@ public class Owner {
 		this.user = user;
 	}
 
-	@JsonIgnore
-	@OneToMany(mappedBy="owner", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<ServiceCenter> getServiceCenters() {
-		return serviceCenters;
+	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
+	@JoinColumn(name = "center_id")
+	public ServiceCenter getServiceCenter() {
+		return serviceCenter;
 	}
 
-	public void setServiceCenters(List<ServiceCenter> serviceCenters) {
-		this.serviceCenters = serviceCenters;
+	public void setServiceCenter(ServiceCenter serviceCenter) {
+		this.serviceCenter = serviceCenter;
 	}
-	
-	public void addServiceCenter(ServiceCenter sc)
-	{
-		this.serviceCenters.add(sc);
-		sc.setOwner(this);	
-	}
-	
-	public void removeServiceCenter(ServiceCenter sc)
-	{
-		this.serviceCenters.remove(sc);
-		sc.setOwner(null);
-	}
-	
-	public void addAddress(Address a)
-	{
-		this.setAddress(a);
-		a.setOwner(this);
-	}
-	
-	public void removeAddress()
-	{
-		this.setAddress(null);
-		this.address.setOwner(null);
-	}
-	
+
 	@Override
 	public String toString() {
 		return "Owner [ownerId=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password="
