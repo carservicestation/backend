@@ -18,6 +18,7 @@ public class ServiceCenter {
 	private String name;
 	private String email;
 	private String phone;
+	private double wallet;
 	
 	private Owner owner;  //2 way
 	private Address address; //1 way

@@ -1,18 +1,22 @@
 package com.app.pojos;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
 @Entity
 @Table(name = "appointment")
 public class Appointment {
 
 	private Integer id;
-	private Date datetime;
-
+	private Date date;
+	private LocalTime time;
 	private Customer customer;							//2 way
 	private Vehicle vehicle;							//1 way
 	private Address pickupAddress;						//1 way
@@ -33,14 +37,26 @@ public class Appointment {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Date getDatetime() {
-		return datetime;
+	
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="yyyy-MM-dd",timezone="IST")
+	public Date getDate() {
+		return date;
 	}
 
-	public void setDatetime(Date datetime) {
-		this.datetime = datetime;
+	public void setDate(Date date) {
+		this.date = date;
 	}
+
+	
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+
 	//---------------------------------------------------------------------------------------------
 	//CUSTOMER
 	//---------------------------------------------------------------------------------------------
@@ -146,7 +162,7 @@ public class Appointment {
 
 	@Override
 	public String toString() {
-		return "Appointment [id=" + id + ", datetime=" + datetime + ", customer=" + customer + ", serviceCenter="
+		return "Appointment [id=" + id + ", date=" + date + ", customer=" + customer + ", serviceCenter="
 				+ serviceCenter + ", vehicle=" + vehicle + ", payment=" + payment + ", pickupAddress=" + pickupAddress
 				+ ", services=" + services + "]";
 	}

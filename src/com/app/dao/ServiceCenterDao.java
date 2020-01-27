@@ -21,6 +21,15 @@ public class ServiceCenterDao implements IServiceCenterDao {
 
 	@Override
 	public Integer addServiceCenter(ServiceCenter sc) {
+
+		// Owner o = sf.getCurrentSession().get(Owner.class,sc.getOwner().getId());
+
+		Owner o = sc.getOwner();
+
+		o.setServiceCenter(sc);
+
+		// sf.getCurrentSession().update(o);
+
 		return (Integer) sf.getCurrentSession().save(sc);
 	}
 
@@ -40,33 +49,32 @@ public class ServiceCenterDao implements IServiceCenterDao {
 		sf.getCurrentSession().remove(sc);
 	}
 
-
 	@Override
 	public ServiceCenter getServiceCenterByOwnerId(int oid) {
-		
+
 		Owner o = sf.getCurrentSession().get(Owner.class, oid);
 		return o.getServiceCenter();
 	}
-	
+
 	@Override
 	public List<ServiceCenter> getServiceCenters() {
-		
+
 		Session session = sf.getCurrentSession();
-		
+
 		Criteria cr = session.createCriteria(ServiceCenter.class)
-			    .setProjection(Projections.projectionList()
-			      .add(Projections.property("id"), "id")
-			      .add(Projections.property("name"), "name")
-			      .add(Projections.property("email"), "email")
-				  .add(Projections.property("phone"), "phone"))
-			    .setResultTransformer(Transformers.aliasToBean(ServiceCenter.class));
+				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")
+						.add(Projections.property("name"), "name").add(Projections.property("email"), "email")
+						.add(Projections.property("phone"), "phone"))
+				.setResultTransformer(Transformers.aliasToBean(ServiceCenter.class));
 
-				List<ServiceCenter> ssl = cr.list();
+		List<ServiceCenter> ssl = cr.list();
 
-	//		String jpql = "select sc.id, sc.name, sc.email, sc.phone from ServiceCenter sc";
-		
-	//	List<ServiceCenter> list = (List<ServiceCenter>) sf.getCurrentSession().createQuery(jpql).getResultList();
-		 
+		// String jpql = "select sc.id, sc.name, sc.email, sc.phone from ServiceCenter
+		// sc";
+
+		// List<ServiceCenter> list = (List<ServiceCenter>)
+		// sf.getCurrentSession().createQuery(jpql).getResultList();
+
 		return ssl;
 	}
 

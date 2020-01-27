@@ -18,6 +18,7 @@ public class Customer {
 	private String password;
 	private Role role;
 	private User user;
+	private double wallet;
 	private Address address;
 	private List<Appointment> appointments = new ArrayList<>();
 

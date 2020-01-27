@@ -95,7 +95,7 @@ public class Owner {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	@JsonIgnore
 	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
 	@JoinColumn(name = "center_id")
 	public ServiceCenter getServiceCenter() {
