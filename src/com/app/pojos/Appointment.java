@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
 @Table(name = "appointment")
-public class Appointment {
-
+public class Appointment
+{
 	private Integer id;
 	private Date date;
 	private LocalTime time;

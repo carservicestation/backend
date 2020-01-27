@@ -87,7 +87,7 @@ public class Owner {
 
 	@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
-	@JsonIgnore
+	//@JsonIgnore
 	public User getUser() {
 		return user;
 	}

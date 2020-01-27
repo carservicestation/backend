@@ -22,14 +22,24 @@ public class UserController {
 	@PostMapping(value = "/validate", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> validateUser(@RequestBody User u) {
 
-		try 
-		{
+		try {
 			return new ResponseEntity<Object>(us.validateUser(u), HttpStatus.OK);// return object
 		}
-
 		catch (RuntimeException e) {
 			e.printStackTrace();
 			return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND);// return null }
+		}
+	}
+
+	@PostMapping("/changePassword")
+	public ResponseEntity<?> changePassword(@RequestBody User u) 
+	{
+		try {
+			return new ResponseEntity<Object>(us.changePassword(u), HttpStatus.OK);
+		} catch (RuntimeException e) {
+			String msg = "Password is wrong";
+			e.printStackTrace();
+			return new ResponseEntity<String>(msg, HttpStatus.NOT_FOUND);
 		}
 	}
 }

@@ -29,6 +29,7 @@ public class OwnerDao implements IOwnerDao {
 
 	@Override
 	public void updateOwner(Owner o) {
+		o.getUser().setEmail(o.getEmail());
 		sf.getCurrentSession().update(o);
 	}
 

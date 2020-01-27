@@ -23,4 +23,9 @@ public class UserService implements IUserService {
 	public User addUser(User u) {
 		return udao.addUser(u);
 	}
+
+	@Override
+	public Object changePassword(User u) {
+		return udao.changePassword(u);		
+	}
 }

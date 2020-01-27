@@ -16,8 +16,8 @@ public class CustomerDao implements ICustomerDao {
 
 	@Override
 	public Customer addCustomer(Customer c) {
-		System.out.println("cd");
 		c.setRole(Role.CUSTOMER);
+		c.setWallet(20000);
 		sf.getCurrentSession().save(c);
 		return c;
 	}
@@ -29,6 +29,7 @@ public class CustomerDao implements ICustomerDao {
 
 	@Override
 	public void updateCustomer(Customer c) {
+		c.getUser().setEmail(c.getEmail());
 		sf.getCurrentSession().update(c);
 	}
 

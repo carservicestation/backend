@@ -81,6 +81,14 @@ public class Customer {
 		this.password = password;
 	}
 
+	public double getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(double wallet) {
+		this.wallet = wallet;
+	}
+
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20)
 	public Role getRole() {
@@ -93,7 +101,7 @@ public class Customer {
 	
 	@OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
-	@JsonIgnore
+	//@JsonIgnore
 	public User getUser() {
 		return user;
 	}

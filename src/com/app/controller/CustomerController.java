@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,20 +25,20 @@ public class CustomerController {
 	@PostMapping("/addCustomer")
 	ResponseEntity<?> addCustomer( @RequestBody Customer c)
 	{
-		System.out.println(c.toString());
-		System.out.println("in cs");
+	    //cust using
 		return new ResponseEntity<Customer>(cs.addCustomer(c), HttpStatus.CREATED);
 	}
 	
-	@PostMapping("/getCustomerById/{cid}")
+	@GetMapping("/getCustomerById/{cid}")
 	ResponseEntity<?> getCustomerById( @PathVariable Integer cid )
 	{
-		cs.getCustomerById(cid);
-		return new ResponseEntity<>(HttpStatus.OK);
+	    //cust using
+		return new ResponseEntity<Customer>(cs.getCustomerById(cid),HttpStatus.OK);
 	}
 	
 	@PostMapping("/addCustomerAddress/{cid}")
 	ResponseEntity<?> addCustomerAddress(@PathVariable Integer cid, @RequestBody Address ca) {
+	    //cust using
 		cs.addCustomerAddress(cid, ca);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
@@ -45,6 +46,7 @@ public class CustomerController {
 	@PostMapping(value="/updateCustomer", consumes = "application/json", produces = "application/json")
 	ResponseEntity<?> updateCustomer( @RequestBody Customer c)
 	{
+	    //cust using
 		cs.updateCustomer(c);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

@@ -73,6 +73,14 @@ public class ServiceCenter {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public double getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(double wallet) {
+		this.wallet = wallet;
+	}
+
 	//--------------------------------------------------------------------------------------
 	//OWNER
 	//--------------------------------------------------------------------------------------

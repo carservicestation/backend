@@ -18,6 +18,23 @@ public class ServiceCenterController {
 	@Autowired
 	private IServiceCenterService service;
 	
+
+	@GetMapping(value="/getServiceCenters", produces = "application/json")
+	ResponseEntity<?> getServiceCenters()
+	{
+		//admin using
+		return new ResponseEntity<List<ServiceCenter>>(service.getServiceCenters(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/removeServiceCenter/{scid}")
+	ResponseEntity<?> removeServiceCenter(@PathVariable Integer scid)
+	{
+		//admin using
+		service.removeServiceCenter(scid);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	
 	@PostMapping(value="/addServiceCenter",consumes = "application/json",produces = "application/json")
 	ResponseEntity<?> addServiceCenter(@RequestBody ServiceCenter sc)
 	{
@@ -47,18 +64,7 @@ public class ServiceCenterController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/removeServiceCenter")
-	ResponseEntity<?> removeServiceCenter(@RequestBody int scid)
-	{
-		service.removeServiceCenter(scid);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
 	
-	@GetMapping(value="/getServiceCenters", produces = "application/json")
-	ResponseEntity<?> getServiceCenters()
-	{
-		return new ResponseEntity<List<ServiceCenter>>(service.getServiceCenters(), HttpStatus.OK);
-	}
 	
 	@GetMapping("/getServiceCentersByOwnerId")
 	ResponseEntity<?> getServiceCentersByOwnerId(int oid)

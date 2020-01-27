@@ -27,6 +27,8 @@ public class ServiceCenterDao implements IServiceCenterDao {
 		Owner o = sc.getOwner();
 
 		o.setServiceCenter(sc);
+		
+		sc.setWallet(50000);
 
 		// sf.getCurrentSession().update(o);
 
@@ -64,6 +66,7 @@ public class ServiceCenterDao implements IServiceCenterDao {
 		Criteria cr = session.createCriteria(ServiceCenter.class)
 				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")
 						.add(Projections.property("name"), "name").add(Projections.property("email"), "email")
+						.add(Projections.property("wallet"), "wallet")
 						.add(Projections.property("phone"), "phone"))
 				.setResultTransformer(Transformers.aliasToBean(ServiceCenter.class));
 

@@ -10,6 +10,8 @@ public class User {
 	private Integer id;
 	private String email;
 	private String password;
+	@Transient
+	private String newPassword;
 	private Role role;
 	
 	public User() {
@@ -49,7 +51,13 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getNewPassword() {
+		return newPassword;
+	}
 
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20)
 	public Role getRole() {

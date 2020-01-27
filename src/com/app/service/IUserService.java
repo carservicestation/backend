@@ -8,4 +8,6 @@ public interface IUserService {
 
 	User addUser(User u);
 
+	Object changePassword(User u) throws RuntimeException;
+
 }
