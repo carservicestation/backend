@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,5 +51,20 @@ public class CustomerController {
 	    //cust using
 		cs.updateCustomer(c);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/removeCustomer/{cid}")
+	ResponseEntity<?> removeCustomer( @PathVariable Integer cid)
+	{
+	    //admin using
+		cs.removeCustomer(cid);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/getAllCustomers")
+	ResponseEntity<?> getAllCustomers()
+	{
+	    //admin using
+		return new ResponseEntity<List<Customer>>(cs.getAllCustomers(), HttpStatus.OK);
 	}
 }

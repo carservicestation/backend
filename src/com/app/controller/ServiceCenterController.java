@@ -64,10 +64,9 @@ public class ServiceCenterController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	
-	
-	@GetMapping("/getServiceCentersByOwnerId")
-	ResponseEntity<?> getServiceCentersByOwnerId(int oid)
+
+	@GetMapping("/GetServiceCenterByOwnerId/{oid}")
+	ResponseEntity<?> getServiceCentersByOwnerId(@PathVariable Integer oid)
 	{
 		return new ResponseEntity<ServiceCenter>(service.getServiceCentersByOwnerId(oid), HttpStatus.OK);
 	}

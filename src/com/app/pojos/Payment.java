@@ -8,15 +8,12 @@ public class Payment {
 
 	private Integer id;
 	private double amount;
-	private Appointment appointment;
+	//private Appointment appointment;
 
 	public Payment() {
 	}
 
-	public Payment(double amount, Appointment appointment) {
-		this.amount = amount;
-		this.appointment = appointment;
-	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="pay_id")
@@ -36,15 +33,16 @@ public class Payment {
 		this.amount = amount;
 	}
 
-	@OneToOne
-	@JoinColumn(name = "apmt_id")
-	public Appointment getAppointment() {
-		return appointment;
-	}
-
-	public void setAppointment(Appointment appointment) {
-		this.appointment = appointment;
-	}
+	
+//	@OneToOne
+//	@JoinColumn(name = "apmt_id")
+//	public Appointment getAppointment() {
+//		return appointment;
+//	}
+//
+//	public void setAppointment(Appointment appointment) {
+//		this.appointment = appointment;
+//	}
 
 	@Override
 	public String toString() {

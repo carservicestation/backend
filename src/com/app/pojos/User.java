@@ -10,7 +10,6 @@ public class User {
 	private Integer id;
 	private String email;
 	private String password;
-	@Transient
 	private String newPassword;
 	private Role role;
 	
@@ -51,6 +50,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	@Transient
 	public String getNewPassword() {
 		return newPassword;
 	}

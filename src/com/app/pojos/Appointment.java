@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
@@ -16,13 +17,15 @@ public class Appointment
 {
 	private Integer id;
 	private Date date;
-	private LocalTime time;
+	private LocalTime time;	
 	private Customer customer;							//2 way
 	private Vehicle vehicle;							//1 way
 	private Address pickupAddress;						//1 way
 	private ServiceCenter serviceCenter;				//2 way
 	private Set<Services> services = new HashSet<>();	//1 way
 	private Payment payment;							//2 way
+	
+	private Status status;
 	
 	public Appointment() {
 	}
@@ -140,7 +143,7 @@ public class Appointment
 	//---------------------------------------------------------------------------------------------
 	//PAYMENT
 	//---------------------------------------------------------------------------------------------
-	@OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	public Payment getPayment() {
 		return payment;
 	}
@@ -148,17 +151,26 @@ public class Appointment
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
-
-	public void addPayment(Payment p) {
-		this.setPayment(p);
-		p.setAppointment(this);
-	}
-
-	public void removePayment(Payment p) {
-		this.setPayment(null);
-		p.setAppointment(null);
-	}
+//
+//	public void addPayment(Payment p) {
+//		this.setPayment(p);
+//		p.setAppointment(this);
+//	}
+//
+//	public void removePayment(Payment p) {
+//		this.setPayment(null);
+//		p.setAppointment(null);
+//	}
 	//---------------------------------------------------------------------------------------------
+
+	@Enumerated(EnumType.STRING)
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
