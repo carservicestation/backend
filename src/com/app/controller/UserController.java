@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.pojos.User;
 import com.app.service.IUserService;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/user")
 public class UserController {
 

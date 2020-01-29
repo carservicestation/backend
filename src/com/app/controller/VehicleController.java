@@ -17,8 +17,8 @@ import com.app.dao.*;
 import com.app.pojos.*;
 import com.app.service.IVehicleService;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/vehicle")
 public class VehicleController {
 

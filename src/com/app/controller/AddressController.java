@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.pojos.*;
 import com.app.service.IAddressService;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/address")
 public class AddressController {
 

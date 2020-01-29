@@ -10,8 +10,8 @@ import com.app.dao.*;
 import com.app.pojos.*;
 import com.app.service.IServiceCenterService;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/servicecenter")
 public class ServiceCenterController {
 	

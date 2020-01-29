@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import com.app.pojos.*;
 import com.app.service.IOwnerService;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/owner")
 public class OwnerController {
 

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.pojos.*;
 import com.app.service.ICustomerService;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/customer")
 public class CustomerController {
 	

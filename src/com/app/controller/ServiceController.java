@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.app.pojos.Services;
 import com.app.service.IServiceService;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/service")
 public class ServiceController {
 
