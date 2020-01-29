@@ -19,7 +19,7 @@ public class Appointment
 {
 	private Integer id;
 	private Date date;
-	private LocalTime time;	
+	private String time;
 	private Customer customer;							//2 way
 	private Vehicle vehicle;							//1 way
 	private Address pickupAddress;						//1 way
@@ -55,12 +55,11 @@ public class Appointment
 		this.date = date;
 	}
 
-	
-	public LocalTime getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(LocalTime time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 

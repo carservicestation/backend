@@ -40,9 +40,9 @@ public class AppointmentDao implements IAppointmentDao {
 
 	@Override
 	public Integer addAppointment(Appointment a) {
-		
+
 		System.out.println(a);
-		
+
 		Session s = sf.getCurrentSession();
 		Vehicle uv = a.getVehicle();
 		String jpql = "Select v from Vehicle v where v.make=:m and v.model=:mm and v.fuelType=:f";
@@ -50,46 +50,13 @@ public class AppointmentDao implements IAppointmentDao {
 				.setParameter("f", uv.getFuelType()).getSingleResult();
 		a.setVehicle(v);
 		a.setStatus(Status.NEW);
-		
+
 		Payment p = a.getPayment();
-		
+
 		s.save(p);
-		
+
 		a.setPayment(p);
-	
-	//	Date cdate = a.getDate();
-		
-//		String jpql1 = "Select a.time from Appointment a where a.date=:cd";
-//		
-//		List<Appointment> t = s.createQuery(jpql1, Appointment.class).setParameter("cd", cdate).getResultList();
-//		
-//		
-//		Criteria cr = s.createCriteria(Appointment.class);
-//				
-//				cr.setProjection(Projections.projectionList().add(Projections.property("time"), "time"));
-//				
-//				cr.addOrder(Order.desc("time"));
-//				
-//				cr.setMaxResults(1);
-//				
-//				cr.setResultTransformer(Transformers.aliasToBean(Appointment.class));
-//
-//		List<LocalTime> ti = cr.list();
-//		
-//		LocalTime ttt = null; 
-//		
-//		if(ti != null)
-//		{
-//			a.setTime(LocalTime.of(10,0,0));
-//		}
-//		else
-//		{
-//			for (LocalTime tt : ti) {
-//				ttt = tt;
-//			}
-//			a.setTime(LocalTime.of(ttt.getHour()+1, 0, 0));
-//		}
-		
+
 		return (Integer) sf.getCurrentSession().save(a);
 	}
 
@@ -97,13 +64,13 @@ public class AppointmentDao implements IAppointmentDao {
 		// using cust
 		Session s = sf.getCurrentSession();
 		Customer c = s.get(Customer.class, cid);
-		
+
 		c.getAppointments().size();
-		
+
 		System.out.println(c.getAppointments());
-		
+
 		System.out.println("kkkkkkkkkkkk");
-		
+
 		return c.getAppointments();
 	}
 
@@ -121,20 +88,25 @@ public class AppointmentDao implements IAppointmentDao {
 	@Override
 	public List<Appointment> getAllAppointments() {
 		String jpql = "Select a from Appointment a";
+		System.out.println("lllllllllllllllll");
 		/*
 		 * private Integer id; private Date date; private LocalTime time; private
 		 * Customer customer; //2 way private Vehicle vehicle; //1 way private Address
 		 * pickupAddress; //1 way private ServiceCenter serviceCenter; //2 way private
 		 * Set<Services> services = new HashSet<>(); //1 way private Payment payment;
 		 * 
-		 */	
+		 */
 //		Session s = sf.getCurrentSession();
 //		
 //		CriteriaBuilder b = s.getCriteriaBuilder();
 //		
 //		CriteriaQuery<Appointment> c = b.createQuery(Appointment.class);
 
-		return sf.getCurrentSession().createQuery(jpql, Appointment.class).getResultList();
+		List<Appointment> alist = sf.getCurrentSession().createQuery(jpql, Appointment.class).getResultList();
+		
+		System.out.println(alist);
+		
+		return alist;
 	}
 
 	@Override
@@ -149,11 +121,11 @@ public class AppointmentDao implements IAppointmentDao {
 	public List<Appointment> getServiceCenterAppointments(Integer oid) {
 		Session s = sf.getCurrentSession();
 		Owner o = s.get(Owner.class, oid);
-		
+
 		List<Appointment> apps = o.getServiceCenter().getAppointments();
-		
+
 		System.out.println(apps);
-		
+
 		return o.getServiceCenter().getAppointments();
 	}
 
@@ -161,6 +133,8 @@ public class AppointmentDao implements IAppointmentDao {
 	public Status acceptAppointment(Integer apid) {
 		Session s = sf.getCurrentSession();
 		Appointment a = s.get(Appointment.class, apid);
+		
+		
 		a.setStatus(Status.ACCEPTED);
 		double custWa = a.getCustomer().getWallet();
 		double scWa = a.getServiceCenter().getWallet();
@@ -169,6 +143,46 @@ public class AppointmentDao implements IAppointmentDao {
 		scWa = scWa + am;
 		a.getCustomer().setWallet(custWa);
 		a.getServiceCenter().setWallet(scWa);
+		
+		Date cdate = a.getDate();
+
+		String jpql1 = "Select a.time from Appointment a where a.date=:cd";
+
+		List<String> tlist = s.createQuery(jpql1, String.class).setParameter("cd", cdate).getResultList();
+		
+		System.out.println(tlist);
+		
+		/*
+		 * Criteria cr = s.createCriteria(Appointment.class);
+		 * 
+		 * cr.setProjection(Projections.projectionList().add(Projections.property("time"
+		 * ), "time"));
+		 * 
+		 * cr.addOrder(Order.desc("time"));
+		 * 
+		 * cr.setMaxResults(1);
+		 * 
+		 * cr.setResultTransformer(Transformers.aliasToBean(Appointment.class));
+		 * 
+		 * List<Appointment> ti = cr.list();
+		 */ 
+		String lastime = null;
+		 
+		if (tlist == null) 
+		{
+			a.setTime(LocalTime.of(10, 0, 0).toString());
+			
+		} else {
+			for (String tt : tlist) 
+			{
+				lastime = tt;
+			}
+			
+			LocalTime lt = LocalTime.parse(lastime);
+	
+			a.setTime(LocalTime.of(lt.getHour() + 1, 0, 0).toString());
+		}
+
 		s.update(a);
 		return a.getStatus();
 	}

@@ -62,8 +62,11 @@ public class VehicleDao implements IVehicleDao {
 	@Override
 	public List<Fuel> getFuels(Vehicle v) {
 		
+		System.out.println(v);
+		
 		String jpql = "select v.fuelType from Vehicle v where v.make = :make and v.model=:model";
 		 List<Fuel> list = (List<Fuel>) sf.getCurrentSession().createQuery(jpql, Fuel.class).setParameter("make", v.getMake()).setParameter("model", v.getModel()).getResultList();
+		 System.out.println(list);
 		 return list;
 	}
 }
