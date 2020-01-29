@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.pojos.Fuel;
 import com.app.pojos.Vehicle;
 
 public interface IVehicleService {
@@ -19,5 +20,7 @@ public interface IVehicleService {
 	List<String> getDistinctVehicleMakes();
 
 	List<String> getModelsByVehicleMakes(String make);
+
+	List<Fuel> getFuels(Vehicle v);
 
 }

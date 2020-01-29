@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "center")
@@ -23,6 +24,7 @@ public class ServiceCenter {
 	private Owner owner;  //2 way
 	private Address address; //1 way
 
+	@JsonIgnore
 	private Set<Services> services = new HashSet<>();  //1 way
 	
 	private List<Appointment> appointments = new ArrayList<>(); //2way done
@@ -117,13 +119,13 @@ public class ServiceCenter {
 	//--------------------------------------------------------------------------------------
 	//SERVICES
 	//--------------------------------------------------------------------------------------
-	//@JsonIgnore
+	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "center_service", joinColumns = @JoinColumn(name = "centre_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
 	public Set<Services> getServices() {
 		return services;
 	}
-
+	@JsonProperty
 	public void setServices(Set<Services> services) {
 		this.services = services;
 	}

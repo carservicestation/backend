@@ -2,6 +2,7 @@ package com.app.dao;
 
 import java.util.List;
 
+import com.app.pojos.Fuel;
 import com.app.pojos.Vehicle;
 
 public interface IVehicleDao {
@@ -20,6 +21,8 @@ public interface IVehicleDao {
 	List<String> getDistinctVehicleMakes();
 
 	List<String> getModelsByVehicleMakes(String make);
+
+	List<Fuel> getFuels(Vehicle v);
 
 	
 

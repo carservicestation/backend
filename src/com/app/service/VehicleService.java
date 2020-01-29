@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.IVehicleDao;
+import com.app.pojos.Fuel;
 import com.app.pojos.Vehicle;
 
 @Service
@@ -49,6 +50,11 @@ public class VehicleService implements IVehicleService {
 	@Override
 	public List<String> getModelsByVehicleMakes(String make) {
 		return dao.getModelsByVehicleMakes(make);
+	}
+
+	@Override
+	public List<Fuel> getFuels(Vehicle v) {
+		return dao.getFuels(v);
 	}
 
 }

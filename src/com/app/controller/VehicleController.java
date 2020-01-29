@@ -73,4 +73,21 @@ public class VehicleController {
 		//customer using
 		return new ResponseEntity<List<String>>(service.getModelsByVehicleMakes(make), HttpStatus.OK);
 	}
+	
+	@PostMapping("/getFuels")
+	ResponseEntity<?> getModelsByVehicleMakes(@RequestBody Vehicle v)
+	{
+		//customer using
+		return new ResponseEntity<List<Fuel>>(service.getFuels(v), HttpStatus.OK);
+	}
+	
+	
+	
 }
+
+
+
+
+
+
+

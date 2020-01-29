@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.pojos.Fuel;
 import com.app.pojos.Vehicle;
 
 @Repository
@@ -55,6 +56,14 @@ public class VehicleDao implements IVehicleDao {
 	public List<String> getModelsByVehicleMakes(String make) {
 		String jpql = "select v.model from Vehicle v where v.make = :make";
 		 List<String> list = (List<String>) sf.getCurrentSession().createQuery(jpql, String.class).setParameter("make", make).getResultList();
+		 return list;
+	}
+
+	@Override
+	public List<Fuel> getFuels(Vehicle v) {
+		
+		String jpql = "select v.fuelType from Vehicle v where v.make = :make and v.model=:model";
+		 List<Fuel> list = (List<Fuel>) sf.getCurrentSession().createQuery(jpql, Fuel.class).setParameter("make", v.getMake()).setParameter("model", v.getModel()).getResultList();
 		 return list;
 	}
 }

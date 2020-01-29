@@ -25,4 +25,6 @@ Integer addAppointment(Appointment a);
 	
 	Appointment getAppointmentById(int apid);
 	
-	List<Appointment> getAppointments();}
+	List<Appointment> getAllAppointments();
+	
+}

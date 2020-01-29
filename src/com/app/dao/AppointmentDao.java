@@ -3,6 +3,7 @@ package com.app.dao;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.app.pojos.Address;
 import com.app.pojos.Appointment;
 import com.app.pojos.Customer;
 import com.app.pojos.Owner;
@@ -117,9 +119,15 @@ public class AppointmentDao implements IAppointmentDao {
 	}
 
 	@Override
-	public List<Appointment> getAppointments() {
+	public List<Appointment> getAllAppointments() {
 		String jpql = "Select a from Appointment a";
-		
+		/*
+		 * private Integer id; private Date date; private LocalTime time; private
+		 * Customer customer; //2 way private Vehicle vehicle; //1 way private Address
+		 * pickupAddress; //1 way private ServiceCenter serviceCenter; //2 way private
+		 * Set<Services> services = new HashSet<>(); //1 way private Payment payment;
+		 * 
+		 */	
 //		Session s = sf.getCurrentSession();
 //		
 //		CriteriaBuilder b = s.getCriteriaBuilder();

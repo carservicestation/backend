@@ -24,7 +24,7 @@ public interface IAppointmentDao {
 	
 	Appointment getAppointmentById(int apid);
 	
-	List<Appointment> getAppointments();
+	List<Appointment> getAllAppointments();
 
 	
 //	Address selectPickupAddress();

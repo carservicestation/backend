@@ -8,11 +8,13 @@ import java.util.Set;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
 @Table(name = "appointment")
+//@JsonIgnoreProperties(allowSetters = true, value = {"services"})
 public class Appointment
 {
 	private Integer id;
@@ -22,6 +24,8 @@ public class Appointment
 	private Vehicle vehicle;							//1 way
 	private Address pickupAddress;						//1 way
 	private ServiceCenter serviceCenter;				//2 way
+	
+    @JsonIgnore
 	private Set<Services> services = new HashSet<>();	//1 way
 	private Payment payment;							//2 way
 	
@@ -131,12 +135,13 @@ public class Appointment
 	//---------------------------------------------------------------------------------------------
 	//SERVICES
 	//---------------------------------------------------------------------------------------------
+    @JsonIgnore
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "appointment_service", joinColumns = @JoinColumn(name = "apmt_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
 	public Set<Services> getServices() {
 		return services;
 	}
-
+    @JsonProperty
 	public void setServices(Set<Services> services) {
 		this.services = services;
 	}

@@ -71,6 +71,9 @@ public class AppointmentController {
 		return new ResponseEntity<Appointment>(s.getAppointmentById(apid), HttpStatus.OK);
 	}
 	
-	
-
+	@GetMapping(value = "getAllAppointments")
+	public ResponseEntity<?> getAllAppointments() {
+		// admin using
+		return new ResponseEntity<List<Appointment>>(s.getAllAppointments(), HttpStatus.OK);
+	}
 }

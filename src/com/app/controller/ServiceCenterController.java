@@ -52,10 +52,10 @@ public class ServiceCenterController {
 		return new ResponseEntity<Integer>(service.addServiceCenter(sc), HttpStatus.OK);
 	}
 	
-	@GetMapping("/getServiceCenterById")
-	ResponseEntity<?> getServiceCenterById(@RequestBody int scid)
+	@GetMapping("/GetServicesByServiceCenter/{scid}")
+	ResponseEntity<?> getServiceCenterById(@PathVariable Integer scid)
 	{
-		return new ResponseEntity<ServiceCenter>(service.getServiceCenterById(scid), HttpStatus.OK);
+		return new ResponseEntity<Set<Services>>(service.getServiceCenterById(scid), HttpStatus.OK);
 	}
 	
 	@GetMapping("/updateServiceCenter")
@@ -70,4 +70,25 @@ public class ServiceCenterController {
 	{
 		return new ResponseEntity<ServiceCenter>(service.getServiceCentersByOwnerId(oid), HttpStatus.OK);
 	}
+
+	@GetMapping("/GetServiceCentersNearCustomer/{cid}")
+	ResponseEntity<?> GetServiceCentersNearCustomer(@PathVariable Integer cid)
+	{
+		return new ResponseEntity<List<ServiceCenter>>(service.GetServiceCentersNearCustomer(cid), HttpStatus.OK);
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

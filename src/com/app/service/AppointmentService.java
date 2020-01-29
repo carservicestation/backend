@@ -63,7 +63,7 @@ public class AppointmentService implements IAppointmentService {
 	}
 
 	@Override
-	public List<Appointment> getAppointments() {
-		return dao.getAppointments();
+	public List<Appointment> getAllAppointments() {
+		return dao.getAllAppointments();
 	}
 }
